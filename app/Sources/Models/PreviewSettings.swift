@@ -80,7 +80,7 @@ enum SampleText: String, CaseIterable, Identifiable {
         case .mixed:
             return "A quiet morning. Let's read together.\n今天的中文字体清晰，汉字宽度保持一致。\n今日は日本語の勉強をします。東京駅で友達に会います。"
         case .chinese:
-            return "今天的中文字体清晰，汉字宽度保持一致。\n我们一起阅读，看看标点、数字 0123456789 和 English 的搭配。\n骨直令遍返。门风国学。"
+            return "今天的中文字体清晰，汉字宽度保持一致。\n我们一起阅读，看看标点、数字 0123456789 和 English 的搭配。\n周末一起去公园散步，顺路喝杯咖啡。"
         case .japanese:
             return "今日は日本語の勉強をします。\n東京駅で友達に会います。カタカナとひらがな。\n明日の朝、一緒にコーヒーを飲みませんか。"
         case .english:

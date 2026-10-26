@@ -34,7 +34,7 @@ this does not convert characters between simplified and traditional writing.
 
 Sample Japanese: 今日は日本語の勉強をします。東京駅で友達に会います。
 
-Sample Chinese: 今天的中文字体清晰，汉字宽度保持一致。骨直令遍返。
+Sample Chinese: 今天的中文字体清晰，汉字宽度保持一致。周末一起去公园散步，顺路喝杯咖啡。
 
 ## Preview on iOS and macOS
 
