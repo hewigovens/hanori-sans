@@ -92,9 +92,15 @@ and checks the resulting preview.
 These checks complement the font build's `npm run verify`; they do not prove
 another app's shaping, fallback, or line-height behavior.
 
+The root README screenshots live in `docs/screenshots/`. Refresh them from the
+UI test attachments named **Hanori Serif preview** (macOS), **Hanori Sans preview**
+(iOS), and **Hanori Appearance** (iOS). Mac captures include only the Hanori window.
+
 ## App icon
 
 The icon combines 文 with the furigana ぶん on an ink-teal background. App-icon
 masters and Retina sizes are in `Assets.xcassets/AppIcon.appiconset/`. The iOS
 master is opaque; the macOS variant has a transparent margin and rounded tile.
 The shared accent color includes Light and Dark appearances.
+The Mac app applies the bundled ICNS at launch so local rebuilds show the current
+artwork in the Dock even when Launch Services has cached an older icon.

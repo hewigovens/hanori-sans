@@ -21,6 +21,7 @@
 		46CB705367A6ACF86B2D675B /* FontCompositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29303BDB2A391849D0F3B6BD /* FontCompositionTests.swift */; };
 		5F1712E2D75417458F703EDF /* MobilePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586118AF3C04A5D50FF22E6 /* MobilePreviewView.swift */; };
 		6032499E1CE53DEF2F0CA396 /* SpecimenLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF20EF70A8D7C92D8A05B0B /* SpecimenLayout.swift */; };
+		61AF23540C195AD3909B059F /* MacAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56869782B705E0C3B73BE57E /* MacAppDelegate.swift */; };
 		6CEAA0868925726A3B3BB5F1 /* TextEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE9FBBEC02E072406A24D96 /* TextEditorSheet.swift */; };
 		6E25B9E463F2241BE504FCB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F480AA9D6419FF874C113906 /* Assets.xcassets */; };
 		7A763BAB336C8F8F2D853103 /* PreviewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606FEA14594DA25A6939BF5A /* PreviewSettings.swift */; };
@@ -61,6 +62,7 @@
 		29303BDB2A391849D0F3B6BD /* FontCompositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontCompositionTests.swift; sourceTree = "<group>"; };
 		3BD44E29379DF3BF3B6826E1 /* SpecimenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecimenView.swift; sourceTree = "<group>"; };
 		55FB72802A46048936D4635E /* SpecimenList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecimenList.swift; sourceTree = "<group>"; };
+		56869782B705E0C3B73BE57E /* MacAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacAppDelegate.swift; sourceTree = "<group>"; };
 		5758067EDE97AEE0627CA101 /* FontCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontCatalog.swift; sourceTree = "<group>"; };
 		5F70EA79D96303951FC21BF8 /* AppearanceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSheet.swift; sourceTree = "<group>"; };
 		606FEA14594DA25A6939BF5A /* PreviewSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSettings.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				B17E1EED429C504960154F8D /* HanoriPreviewApp.swift */,
+				56869782B705E0C3B73BE57E /* MacAppDelegate.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				CDAFFAA4595889AD65E3620C /* ControlsView.swift in Sources */,
 				DA9AD47354C9F7E60115C438 /* FontCatalog.swift in Sources */,
 				399F36C7CD211693E90D9A4C /* HanoriPreviewApp.swift in Sources */,
+				61AF23540C195AD3909B059F /* MacAppDelegate.swift in Sources */,
 				5F1712E2D75417458F703EDF /* MobilePreviewView.swift in Sources */,
 				9AF5B16A93529194D876F95A /* PNGDocument.swift in Sources */,
 				7A763BAB336C8F8F2D853103 /* PreviewSettings.swift in Sources */,
@@ -473,7 +477,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -541,7 +545,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

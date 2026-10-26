@@ -44,10 +44,23 @@ Sample Chinese: 今天的中文字体清晰，汉字宽度保持一致。周末�
 
 ## Preview on iOS and macOS
 
+<img src="app/Assets.xcassets/AppIcon.appiconset/Icon-mac-128@2x.png" width="80" alt="Hanori app icon: 文 with ぶん readings on teal">
+
 Open [`app/HanoriPreview.xcodeproj`](app/HanoriPreview.xcodeproj) in Xcode and run
 **HanoriPreview** on My Mac, an iPhone, or an iPad simulator. The app bundles all
 four fonts and loads the bundled bytes directly; no font installation is needed.
 Minimum versions are iOS 17 and macOS 14.
+
+**macOS** — edit text and compare both reading modes with the controls in the sidebar.
+
+![Hanori Preview on macOS showing Serif with plain Chinese and Japanese furigana](docs/screenshots/macos-preview.png)
+
+**iOS** — the font preview and its Appearance sheet.
+
+<p>
+  <img src="docs/screenshots/ios-preview.png" width="280" alt="Hanori Sans preview on iOS showing English, Chinese, and Japanese text">
+  <img src="docs/screenshots/ios-appearance.png" width="280" alt="iOS Appearance controls for language hints, font size, line spacing, and baseline guides">
+</p>
 
 - Switch between Sans and Serif; each design shows its two reading modes.
 - On iOS, use **Text** for the editor and samples, and **Appearance** for rendering controls.

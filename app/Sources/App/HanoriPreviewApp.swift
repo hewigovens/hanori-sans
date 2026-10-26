@@ -2,6 +2,9 @@ import SwiftUI
 
 @main
 struct HanoriPreviewApp: App {
+    #if os(macOS)
+    @NSApplicationDelegateAdaptor(MacAppDelegate.self) private var appDelegate
+    #endif
     private let catalog = Result { try FontCatalog() }
 
     var body: some Scene {
