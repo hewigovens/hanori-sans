@@ -1,7 +1,28 @@
 # Hanori 0.1.3
 
-Font prototypes for English, Simplified Chinese, and Japanese reading, with
-**Sans** and **Serif** designs and two furigana modes for each.
+Fonts for English, Simplified Chinese, and Japanese reading, with **Sans** and
+**Serif** designs and optional built-in furigana.
+
+## Why Hanori?
+
+Hanori started with a problem in LINE on macOS: keeping LINE's interface in
+English could give Chinese messages unwanted Japanese glyph forms and uneven
+spacing. Selecting Hanori as the app's font addresses that without changing the
+interface language:
+
+- **Chinese forms across app languages.** Covered Han characters keep their
+  Chinese shapes even when the app supplies English or Japanese language hints.
+- **Consistent Chinese spacing.** Han characters retain full-width advances.
+- **English that fits alongside CJK text.** Latin letters and kerning come from
+  Inter or Source Serif 4.
+- **Japanese reading help.** Furigana comes from the font without changing the
+  underlying message or adding ruby markup.
+
+Install the font, then select it in apps that support custom fonts to apply these
+choices. Shared Han characters also use Chinese forms in Japanese text;
+simplified/traditional writing stays as typed.
+
+## Choose a font
 
 | Family | Composition | Automatic readings |
 | --- | --- | --- |
@@ -10,46 +31,35 @@ Font prototypes for English, Simplified Chinese, and Japanese reading, with
 | Hanori Serif | Source Serif 4 + Source Han Serif CN | Japanese language hints only |
 | Hanori Serif Furigana | Same Serif design | Always enabled |
 
-Built fonts and validation reports are in [`dist/`](dist/). The repository also
-includes pinned source fonts, TypeScript tooling, licenses, and a native SwiftUI
-preview app for iOS and macOS.
-All four fonts are static Regular-weight OpenType fonts.
+All four are static Regular-weight OpenType fonts in [`dist/`](dist/).
+
+<details>
+<summary>Font specimens</summary>
 
 ![Hanori Sans specimen](dist/specimen.png)
 
 ![Hanori Serif specimen](dist/serif-specimen.png)
 
-Chinese Han characters retain the chosen Chinese source's outlines and one-em
-advances. Latin outlines, advances, and supported kerning rules come from Inter
-or Source Serif 4. Source Han's locale substitutions, Latin ligatures, and
-proportional CJK width features are disabled so they cannot undo these choices.
-Shared Han glyphs use Chinese forms even in Japanese text; this does not convert
-characters between simplified and traditional writing.
+</details>
 
 ## Try on macOS
 
-1. Open the desired `.otf` files in `dist/` and install them with Font Book.
-2. Fully quit and reopen the app where you want to use them.
-3. Select **Hanori Sans** or **Hanori Serif** for mixed-language reading, or the
-   corresponding **Furigana** family for always-on Japanese readings.
-4. Check the app's line spacing and whether it clips readings above the text.
+1. Install the desired `.otf` files from `dist/` with Font Book.
+2. Quit and reopen the target app, then choose **Hanori Sans** or **Hanori Serif**.
+   Choose the corresponding **Furigana** family for always-on readings.
 
-In Chrome or Edge, Standard can use either design, Serif can use **Hanori Serif**,
-and Sans-serif can use **Hanori Sans**. Keep your existing fixed-width font.
-These are browser defaults; websites can request other fonts.
-
-Sample Japanese: 今日は日本語の勉強をします。東京駅で友達に会います。
-
-Sample Chinese: 今天的中文字体清晰，汉字宽度保持一致。周末一起去公园散步，顺路喝杯咖啡。
+In Chrome or Edge, use either design for Standard, **Hanori Serif** for Serif, and
+**Hanori Sans** for Sans-serif. Keep your existing fixed-width font. Websites can
+still request their own fonts.
 
 ## Preview on iOS and macOS
 
 <img src="app/Assets.xcassets/AppIcon.appiconset/Icon-mac-128@2x.png" width="80" alt="Hanori app icon: 文 with ぶん readings on teal">
 
-Open [`app/HanoriPreview.xcodeproj`](app/HanoriPreview.xcodeproj) in Xcode and run
-**HanoriPreview** on My Mac, an iPhone, or an iPad simulator. The app bundles all
-four fonts and loads the bundled bytes directly; no font installation is needed.
-Minimum versions are iOS 17 and macOS 14.
+Run `npm run app` on macOS, or open
+[`app/HanoriPreview.xcodeproj`](app/HanoriPreview.xcodeproj) in Xcode for iOS.
+The app bundles all four fonts and supports iOS 17+ and macOS 14+; no font
+installation is needed. Other iOS apps need their own custom-font support.
 
 **macOS** — edit text and compare both reading modes with the controls in the sidebar.
 
@@ -62,97 +72,45 @@ Minimum versions are iOS 17 and macOS 14.
   <img src="docs/screenshots/ios-appearance.png" width="280" alt="iOS Appearance controls for language hints, font size, line spacing, and baseline guides">
 </p>
 
-- Switch between Sans and Serif; each design shows its two reading modes.
-- On iOS, use **Text** for the editor and samples, and **Appearance** for rendering controls.
-- Edit text or choose English, Chinese, Japanese, and ambiguous Han samples.
-- Choose explicit language hints or a per-paragraph kana hint.
-- Adjust font size and line height, show baselines, and export the selected pair as PNG.
-
-The kana mode runs in the app. Each paragraph containing hiragana or katakana
-gets a Japanese language hint; Han-only paragraphs stay untagged. It does not
-add language detection to the font or to other apps.
-
-On macOS, `npm run app` builds and opens the app. See
-[`app/README.md`](app/README.md) for build and test commands, including physical iOS devices.
+Edit text, compare reading modes, adjust language hints and typography, and export
+PNG specimens. See [`app/README.md`](app/README.md) for controls, kana hints, and
+device testing.
 
 ## Furigana behavior
 
-FuriFont's dictionary and OpenType rules supply readings without changing the
-underlying text. Ruby size is 0.45 em, with a 0.04 em gap. Each design fills its
-available glyph budget; see `dist/furigana-report.json` and
-`dist/serif-furigana-report.json` for coverage. Isolated kanji use a stricter 0.9
-confidence threshold.
+Default faces need the app to supply a Japanese language hint. Our English-mode
+LINE trial left Japanese plain; choose a **Furigana** face for readings there.
+Always-on readings can also annotate Chinese words that match the Japanese dictionary.
 
-The default faces follow app-provided language hints. Japanese hints activate
-readings; English, Simplified Chinese, or missing hints leave them plain.
-The Furigana faces enable readings regardless of the hint. Chinese words that
-match the Japanese dictionary can therefore receive Japanese readings.
-Readings may be wrong, especially for ambiguous words, names, and verbs.
-
-Horizontal reading is the target; vertical furigana is unsupported. Leave room
-above the text; around 1.6–1.7 em line height is a useful starting point.
-
-In the Sans LINE trial, both languages stayed plain with the selective behavior:
-English-mode LINE did not supply useful Japanese hints. Its tested Qt renderer
-also split Han and kana before contextual font rules could inspect both scripts.
-The Serif faces use the same hint policy; the preview app tests Core Text rather
-than LINE's renderer.
-
-There is no bundled emoji font. Emoji and unsupported rare characters depend on
-the app's normal fallback behavior.
+Readings may be wrong. Leave room above the text—roughly 1.6–1.7× line height is a
+starting point. Vertical furigana is unsupported; emoji and rare missing characters
+use the app's fallback fonts.
 
 ## Build and verification
 
-[`families.json`](families.json) defines both compositions. Internal plain bases
-are written to `build/HanoriSansBase-Regular.otf` and
-`build/HanoriSerifBase-Regular.otf`. FuriFont compiles each always-on face, then
-the TypeScript tools in [`tools/`](tools/) restrict automatic readings to Japanese
-hints for each default sibling. Only the four public faces are written to `dist/`.
-
-`npm run verify` checks saved table checksums, coverage, sorted layout and pair
-records, full-width Han advances, every Chinese Han outline, Latin source metrics,
-CFF/hmtx consistency, and embedding flags. HarfBuzz checks language-dependent
-readings and Latin kerning. Build and validation reports are saved beside the fonts.
-
-`npm run verify:native` runs the app's Core Text tests on macOS. These compare
-Chinese outlines and Latin kerning against the original sources, check readings
-with language hints, and exercise wrapping, Unicode boundaries, and PNG exports.
-`npm run test:app` also runs the Mac UI test. The iOS flow test covers text editing
-and appearance controls. Tests of our renderer do not establish another app's
-shaping or fallback behavior.
-
-## Rebuild
-
-The font pipeline requires Node.js 22.18+ and npm. It runs TypeScript directly;
-Python and a virtual environment are not needed. Native app checks require Xcode
-on macOS.
+Requires Node.js 22.18+ and npm. Native app checks additionally require Xcode.
 
 ```sh
 npm ci --ignore-scripts
 npm run build
 npm test
 
-# macOS: native rendering checks and the preview app.
+# macOS: Core Text composition and renderer tests.
 npm run verify:native
-npm run app
 ```
 
-`npm run build` verifies the source hashes and restores missing inputs before
-composition; `npm run fetch` does only that step. Font inputs are pinned to
-upstream revisions and SHA-256 hashes in `sources.json`. npm dependencies are
-locked, and a fixed build time makes outputs reproducible.
-
-[`AGENTS.md`](AGENTS.md) describes the code layout, font constraints, and development
-commands. All tooling lives in `tools/`; native app code and tests live in `app/`.
+The TypeScript pipeline uses pinned inputs and reproducible timestamps. Tests
+check Chinese outlines and spacing, Latin metrics and kerning, language-dependent
+readings, and native rendering. Reports are in `dist/`; architecture and development
+commands are in [`AGENTS.md`](AGENTS.md).
 
 ## Credits and licensing
 
-- [Inter](https://github.com/rsms/inter), by Rasmus Andersson and the Inter Project Authors: SIL OFL 1.1.
-- [Source Han Sans](https://github.com/adobe-fonts/source-han-sans), by Adobe: SIL OFL 1.1.
-- [Source Serif 4](https://github.com/adobe-fonts/source-serif), by Adobe: SIL OFL 1.1.
-- [Source Han Serif](https://github.com/adobe-fonts/source-han-serif), by Adobe: SIL OFL 1.1.
+- Fonts: [Inter](https://github.com/rsms/inter), [Source Serif 4](https://github.com/adobe-fonts/source-serif),
+  [Source Han Sans](https://github.com/adobe-fonts/source-han-sans), and
+  [Source Han Serif](https://github.com/adobe-fonts/source-han-serif) — SIL OFL 1.1.
 - [FuriFont](https://github.com/antfu/furifont), by Anthony Fu: MIT code; derived fonts under SIL OFL 1.1.
-- Dictionary-derived readings and rules: CC BY-SA 4.0, with upstream sources and
-  additional attribution in `licenses/Dictionary-CC-BY-SA.md`.
+- Dictionary readings and rules: CC BY-SA 4.0; see
+  [dictionary attribution](licenses/Dictionary-CC-BY-SA.md).
 
 Preserve the included licenses and attributions when sharing these files.
