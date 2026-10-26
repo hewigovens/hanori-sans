@@ -1,0 +1,30 @@
+{
+  "checks": [
+    "all font tables load",
+    "base coverage retained",
+    "full-width Han",
+    "Chinese source outlines retained",
+    "Inter ASCII widths",
+    "CFF/hmtx consistency",
+    "locale substitutions disabled",
+    "embedding permitted"
+  ],
+  "fonts": [
+    {
+      "file": "HanoriSans-Regular.otf",
+      "family": "Hanori Sans",
+      "glyphs": 65516,
+      "codepoints": 30926,
+      "full_width_han_checked": 27801,
+      "sha256": "92b42e4b768936bb5c5df26ffed7807a6fbf5d1aa7ad66c4268dbdb756795f75"
+    },
+    {
+      "file": "HanoriSansFurigana-Regular.otf",
+      "family": "Hanori Sans Furigana",
+      "glyphs": 65516,
+      "codepoints": 30926,
+      "full_width_han_checked": 27801,
+      "sha256": "aacb2a46d57131548c41c33a1a25cb3327107e8a45733aac136df14c9f27793b"
+    }
+  ]
+}

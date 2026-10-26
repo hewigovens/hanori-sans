@@ -1,0 +1,16 @@
+# Local dependencies and build intermediates
+node_modules/
+.venv/
+build/
+vendor/
+__pycache__/
+*.py[cod]
+*.part
+
+# Download bundles and machine-specific installation records
+/*.zip
+/dist/installed-fonts.json
+/dist/install-upgrade.json
+/diagnostics/kana-context/work/
+/diagnostics/kana-context/cleanup.json
+.DS_Store

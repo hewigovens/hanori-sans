@@ -1,0 +1,102 @@
+[
+  {
+    "annotatedGlyphs" : 0,
+    "language" : "unspecified",
+    "text" : "今天是星期一，我们一起学习中文。"
+  },
+  {
+    "annotatedGlyphs" : 0,
+    "language" : "unspecified",
+    "text" : "今日は日本語の勉強をします。"
+  },
+  {
+    "annotatedGlyphs" : 0,
+    "language" : "unspecified",
+    "text" : "今日"
+  },
+  {
+    "annotatedGlyphs" : 0,
+    "language" : "unspecified",
+    "text" : "日本"
+  },
+  {
+    "annotatedGlyphs" : 0,
+    "language" : "unspecified",
+    "text" : "東京"
+  },
+  {
+    "annotatedGlyphs" : 0,
+    "language" : "en",
+    "text" : "今天是星期一，我们一起学习中文。"
+  },
+  {
+    "annotatedGlyphs" : 0,
+    "language" : "en",
+    "text" : "今日は日本語の勉強をします。"
+  },
+  {
+    "annotatedGlyphs" : 0,
+    "language" : "en",
+    "text" : "今日"
+  },
+  {
+    "annotatedGlyphs" : 0,
+    "language" : "en",
+    "text" : "日本"
+  },
+  {
+    "annotatedGlyphs" : 0,
+    "language" : "en",
+    "text" : "東京"
+  },
+  {
+    "annotatedGlyphs" : 0,
+    "language" : "zh-Hans",
+    "text" : "今天是星期一，我们一起学习中文。"
+  },
+  {
+    "annotatedGlyphs" : 0,
+    "language" : "zh-Hans",
+    "text" : "今日は日本語の勉強をします。"
+  },
+  {
+    "annotatedGlyphs" : 0,
+    "language" : "zh-Hans",
+    "text" : "今日"
+  },
+  {
+    "annotatedGlyphs" : 0,
+    "language" : "zh-Hans",
+    "text" : "日本"
+  },
+  {
+    "annotatedGlyphs" : 0,
+    "language" : "zh-Hans",
+    "text" : "東京"
+  },
+  {
+    "annotatedGlyphs" : 2,
+    "language" : "ja",
+    "text" : "今天是星期一，我们一起学习中文。"
+  },
+  {
+    "annotatedGlyphs" : 4,
+    "language" : "ja",
+    "text" : "今日は日本語の勉強をします。"
+  },
+  {
+    "annotatedGlyphs" : 1,
+    "language" : "ja",
+    "text" : "今日"
+  },
+  {
+    "annotatedGlyphs" : 1,
+    "language" : "ja",
+    "text" : "日本"
+  },
+  {
+    "annotatedGlyphs" : 2,
+    "language" : "ja",
+    "text" : "東京"
+  }
+]

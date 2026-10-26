@@ -1,0 +1,16 @@
+{
+  "base": "build/HanoriBase-Regular.otf",
+  "family": "Hanori Sans Furigana",
+  "version": "0.1.2",
+  "furiganaScript": "hiragana",
+  "take": "max",
+  "isolated": true,
+  "isolatedMinShare": 0.9,
+  "metrics": {
+    "rubyScale": 0.45,
+    "rubyGap": 0.04,
+    "compressionFloor": 0.8,
+    "maxRubyWidth": 1.5
+  },
+  "formats": ["otf"]
+}

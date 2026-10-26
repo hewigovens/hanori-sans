@@ -1,0 +1,65 @@
+{
+  "version": "0.1.2",
+  "compiler": "furifont@0.6.2",
+  "config": {
+    "family": "Hanori Sans Furigana",
+    "furiganaScript": "hiragana",
+    "sources": [
+      "jmdict",
+      "ichi",
+      "news",
+      "spec",
+      "gai",
+      "nf",
+      "tatoeba",
+      "place",
+      "mahjong-yaku",
+      "jr-stations",
+      "yojijukugo",
+      "japan-post"
+    ],
+    "skip": 0,
+    "take": "max",
+    "isolated": true,
+    "kanaRomaji": true,
+    "isolatedMinShare": 0.9,
+    "words": {
+      "add": [],
+      "remove": [],
+      "pin": []
+    },
+    "metrics": {
+      "rubyScale": 0.45,
+      "rubyGap": 0.04,
+      "compressionFloor": 0.8,
+      "maxRubyWidth": 1.5
+    },
+    "base": "build/HanoriBase-Regular.otf",
+    "formats": [
+      "otf"
+    ],
+    "version": "0.1.2"
+  },
+  "stats": {
+    "candidates": 233904,
+    "patterns": 70295,
+    "places": 51998,
+    "ambiguous": 225,
+    "isolated": 1630,
+    "suffixes": 633,
+    "protectedAnnotated": 2368,
+    "protectedBare": 2769,
+    "glyphs": 24097,
+    "rules": 75887
+  },
+  "files": [
+    {
+      "name": "HanoriSansFurigana-Regular.otf",
+      "bytes": 32809136
+    },
+    {
+      "name": "HanoriSansFurigana-Regular.ivs.json",
+      "bytes": 138657
+    }
+  ]
+}

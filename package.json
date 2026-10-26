@@ -1,0 +1,13 @@
+{
+  "name": "hanori-sans-build",
+  "private": true,
+  "version": "0.1.2",
+  "type": "module",
+  "scripts": {
+    "build": ".venv/bin/python scripts/build_base.py && node scripts/build_furigana.mjs && .venv/bin/python scripts/build_default.py",
+    "verify": ".venv/bin/python scripts/verify.py && swift -module-cache-path vendor/swift-module-cache scripts/render.swift . && swift -module-cache-path vendor/swift-module-cache scripts/probe_default.swift ."
+  },
+  "dependencies": {
+    "furifont": "0.6.2"
+  }
+}
