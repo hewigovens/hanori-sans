@@ -3,22 +3,29 @@ import CoreText
 import ImageIO
 
 let root = URL(fileURLWithPath: CommandLine.arguments[1], isDirectory: true)
-let regularName = "HanoriSans-Regular"
-let furiganaName = "HanoriSansFurigana-Regular"
-let baseReport = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("dist/base-report.json"))) as! [String: Int]
-let baseGlyphCount = baseReport["glyph_count"]!
-for filename in ["HanoriSans-Regular.otf", "HanoriSansFurigana-Regular.otf"] {
-    var error: Unmanaged<CFError>?
-    let url = root.appendingPathComponent("dist/" + filename)
-    guard CTFontManagerRegisterFontsForURL(url as CFURL, .process, &error) else {
-        fatalError("Font registration failed: \(String(describing: error?.takeRetainedValue()))")
-    }
+let familyID = CommandLine.arguments.count > 2 ? CommandLine.arguments[2] : "sans"
+let families = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("families.json"))) as! [[String: Any]]
+let family = families.first { $0["id"] as? String == familyID }!
+let familyName = family["name"] as! String
+let stem = familyName.replacingOccurrences(of: " ", with: "")
+let prefix = familyID == "sans" ? "" : familyID + "-"
+let package = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("package.json"))) as! [String: Any]
+let version = (package["version"] as! String).split(separator: ".").map { Int($0)! }
+let expectedVersion = String(format: "Version %d.%d%02d", version[0], version[1], version[2])
+let regularName = stem + "-Regular"
+let furiganaName = stem + "Furigana-Regular"
+let baseReport = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("dist/\(prefix)base-report.json"))) as! [String: Any]
+let baseGlyphCount = baseReport["glyph_count"] as! Int
+var fonts: [String: CGFont] = [:]
+for name in [regularName, furiganaName] {
+    let url = root.appendingPathComponent("dist/\(name).otf")
+    fonts[name] = CGFont(CGDataProvider(url: url as CFURL)!)!
 }
 
 func makeLine(_ text: String, name: String, size: CGFloat, language: String = "en", color: CGColor = CGColor(gray: 0.13, alpha: 1)) -> CTLine {
-    let font = CTFontCreateWithName(name as CFString, size, nil)
+    let font = CTFontCreateWithGraphicsFont(fonts[name]!, size, nil, nil)
     precondition(CTFontCopyPostScriptName(font) as String == name, "Unexpected font fallback for \(name)")
-    precondition(CTFontCopyName(font, kCTFontVersionNameKey) as String? == "Version 0.102", "Unexpected font version for \(name)")
+    precondition(CTFontCopyName(font, kCTFontVersionNameKey) as String? == expectedVersion, "Unexpected font version for \(name)")
     let attributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key(kCTFontAttributeName as String): font,
         NSAttributedString.Key(kCTForegroundColorAttributeName as String): color,
@@ -89,7 +96,7 @@ let plainJapanese = glyphIDs(makeLine("日本語", name: regularName, size: 40),
 let rubyJapanese = glyphIDs(makeLine("日本語", name: furiganaName, size: 40), expectedFont: furiganaName)
 precondition(plainJapanese != rubyJapanese && rubyJapanese.contains(where: { Int($0) >= baseGlyphCount }), "Furigana shaping did not select annotated glyphs")
 let reportData = try JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted, .sortedKeys])
-try reportData.write(to: root.appendingPathComponent("dist/coretext-report.json"))
+try reportData.write(to: root.appendingPathComponent("dist/\(prefix)coretext-report.json"))
 
 let width = 1800
 let height = 1450
@@ -114,11 +121,11 @@ func rule(_ top: CGFloat) {
     context.strokePath()
 }
 
-draw("Hanori Sans", size: 76, top: 120)
-draw("Inter + Source Han Sans CN + hiragana readings", size: 28, top: 174)
+draw(familyName, size: 76, top: 120)
+draw("\(family["latinName"] as! String) + \(family["cjkName"] as! String) + hiragana readings", size: 28, top: 174)
 label("Native macOS Core Text specimen · Regular weight · Language hints shown below", top: 215)
 rule(250)
-label("ENGLISH / INTER", top: 300)
+label("ENGLISH / \((family["latinName"] as! String).uppercased())", top: 300)
 draw("The quick brown fox jumps over the lazy dog.", size: 49, top: 370)
 draw("Aa Bb Gg Rr 0123456789  —  AVATAR, office & café", size: 43, top: 432)
 rule(474)
@@ -126,18 +133,18 @@ label("SIMPLIFIED CHINESE / FULL-WIDTH HAN", top: 524)
 draw("今天的中文字体清晰，汉字宽度保持一致。", size: 52, top: 599)
 draw("周末一起去公园散步，顺路喝杯咖啡。 / Hello, 世界！", size: 47, top: 665)
 rule(708)
-label("HANORI SANS / ENGLISH LANGUAGE HINT / PLAIN", top: 758)
+label("\(familyName.uppercased()) / ENGLISH LANGUAGE HINT / PLAIN", top: 758)
 draw("今日は日本語の勉強をします。", size: 51, top: 834)
-label("HANORI SANS / JAPANESE LANGUAGE HINT / READINGS ENABLED", top: 912)
+label("\(familyName.uppercased()) / JAPANESE LANGUAGE HINT / READINGS ENABLED", top: 912)
 draw("今日は日本語の勉強をします。", size: 51, language: "ja", top: 1024)
-label("HANORI SANS FURIGANA / ENGLISH LANGUAGE HINT / ALWAYS ON", top: 1102)
+label("\(familyName.uppercased()) FURIGANA / ENGLISH LANGUAGE HINT / ALWAYS ON", top: 1102)
 draw("東京駅で友達に会います。", name: furiganaName, size: 51, top: 1214)
 rule(1264)
-label("The default follows app language hints. LINE's English mode leaves both languages plain.", top: 1315)
+label("The default requires Japanese language hints; apps without them leave Japanese plain.", top: 1315)
 label("The Furigana face always offers readings; shared Chinese words can also receive them.", top: 1356)
 
 let image = context.makeImage()!
-let destination = CGImageDestinationCreateWithURL(root.appendingPathComponent("dist/specimen.png") as CFURL, "public.png" as CFString, 1, nil)!
+let destination = CGImageDestinationCreateWithURL(root.appendingPathComponent("dist/\(prefix)specimen.png") as CFURL, "public.png" as CFString, 1, nil)!
 CGImageDestinationAddImage(destination, image, nil)
 precondition(CGImageDestinationFinalize(destination))
-print("Rendered specimen.png; Core Text reports saved for English, Chinese, Japanese, and mixed text in three language contexts.")
+print("Rendered \(prefix)specimen.png; Core Text reports saved for English, Chinese, Japanese, and mixed text in three language contexts.")

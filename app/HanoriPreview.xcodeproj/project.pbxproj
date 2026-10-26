@@ -16,14 +16,24 @@
 		399F36C7CD211693E90D9A4C /* HanoriPreviewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17E1EED429C504960154F8D /* HanoriPreviewApp.swift */; };
 		6032499E1CE53DEF2F0CA396 /* SpecimenLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF20EF70A8D7C92D8A05B0B /* SpecimenLayout.swift */; };
 		7A763BAB336C8F8F2D853103 /* PreviewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606FEA14594DA25A6939BF5A /* PreviewSettings.swift */; };
+		99FAB5A053C4F361345918B7 /* HanoriSerifFurigana-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A1B5F0C6FBB77B379CB44D25 /* HanoriSerifFurigana-Regular.otf */; };
 		9AF5B16A93529194D876F95A /* PNGDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6866D0615AF80D6236CF15A /* PNGDocument.swift */; };
+		A503B90DFA82B262221524E2 /* HanoriPreviewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC485B7FC3CC31D144C0B4C /* HanoriPreviewUITests.swift */; };
 		CDAFFAA4595889AD65E3620C /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9A22617A27E383036D6565 /* ControlsView.swift */; };
 		D8867DF6C44C1ECC81DF1FC8 /* HanoriPreviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE988B2DCF4762AA6A6A43D8 /* HanoriPreviewTests.swift */; };
 		DA9AD47354C9F7E60115C438 /* FontCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5758067EDE97AEE0627CA101 /* FontCatalog.swift */; };
 		DE4EDFC2701E396916CD87B4 /* HanoriSans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BB653529FC458B1849E5F0BE /* HanoriSans-Regular.otf */; };
+		DEFA65246FDC26743EA592DB /* HanoriSerif-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 14008731DA13C7B199F31999 /* HanoriSerif-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8E10E769955DD91DA810F308 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2303DCF0EA1B2B47A3EEE22C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2F18F9809AC3E0590F6808B;
+			remoteInfo = HanoriPreview;
+		};
 		966704330C03674A0D778941 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2303DCF0EA1B2B47A3EEE22C /* Project object */;
@@ -35,12 +45,16 @@
 
 /* Begin PBXFileReference section */
 		02D177486611F15A5E5F0263 /* HanoriSansFurigana-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HanoriSansFurigana-Regular.otf"; sourceTree = "<group>"; };
+		0BC485B7FC3CC31D144C0B4C /* HanoriPreviewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanoriPreviewUITests.swift; sourceTree = "<group>"; };
+		14008731DA13C7B199F31999 /* HanoriSerif-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HanoriSerif-Regular.otf"; sourceTree = "<group>"; };
 		246BDBFC9C9F3E751C5CF2C4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3BD44E29379DF3BF3B6826E1 /* SpecimenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecimenView.swift; sourceTree = "<group>"; };
 		5758067EDE97AEE0627CA101 /* FontCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontCatalog.swift; sourceTree = "<group>"; };
 		606FEA14594DA25A6939BF5A /* PreviewSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSettings.swift; sourceTree = "<group>"; };
+		61EF546813C8FE81BA9C2162 /* HanoriPreviewUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = HanoriPreviewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A874A7E9A55F775FD0A2C0D /* HanoriPreview.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HanoriPreview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		875132FF534362100386604A /* SpecimenCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecimenCard.swift; sourceTree = "<group>"; };
+		A1B5F0C6FBB77B379CB44D25 /* HanoriSerifFurigana-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HanoriSerifFurigana-Regular.otf"; sourceTree = "<group>"; };
 		B17E1EED429C504960154F8D /* HanoriPreviewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanoriPreviewApp.swift; sourceTree = "<group>"; };
 		BB653529FC458B1849E5F0BE /* HanoriSans-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HanoriSans-Regular.otf"; sourceTree = "<group>"; };
 		CD9A22617A27E383036D6565 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
@@ -53,11 +67,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		19374EBEF3F3A9EC578F039C /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				0BC485B7FC3CC31D144C0B4C /* HanoriPreviewUITests.swift */,
+			);
+			path = UITests;
+			sourceTree = "<group>";
+		};
 		1DF65E7BC36207E14529982C /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				7A874A7E9A55F775FD0A2C0D /* HanoriPreview.app */,
 				E3D606D6718E5540679E0578 /* HanoriPreviewTests.xctest */,
+				61EF546813C8FE81BA9C2162 /* HanoriPreviewUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,6 +90,8 @@
 			children = (
 				BB653529FC458B1849E5F0BE /* HanoriSans-Regular.otf */,
 				02D177486611F15A5E5F0263 /* HanoriSansFurigana-Regular.otf */,
+				14008731DA13C7B199F31999 /* HanoriSerif-Regular.otf */,
+				A1B5F0C6FBB77B379CB44D25 /* HanoriSerifFurigana-Regular.otf */,
 			);
 			name = dist;
 			path = ../dist;
@@ -87,6 +112,7 @@
 				3AD8B61DB04F7AD1D10785B6 /* dist */,
 				F4AED4675A65E5064543437E /* Sources */,
 				7F34C851DEC857C73D6B1F11 /* Tests */,
+				19374EBEF3F3A9EC578F039C /* UITests */,
 				1DF65E7BC36207E14529982C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -151,6 +177,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		45C296F39F17AC0B3300E0A6 /* HanoriPreviewUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 33BB258D4CF894237550FF21 /* Build configuration list for PBXNativeTarget "HanoriPreviewUITests" */;
+			buildPhases = (
+				B6FEF341D12988F356D57C75 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E382CC1227FA8BD0BA42DC19 /* PBXTargetDependency */,
+			);
+			name = HanoriPreviewUITests;
+			packageProductDependencies = (
+			);
+			productName = HanoriPreviewUITests;
+			productReference = 61EF546813C8FE81BA9C2162 /* HanoriPreviewUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		9678DCDFD034EC0C6BEC7608 /* HanoriPreviewTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F8226FCE25BD7466067BA232 /* Build configuration list for PBXNativeTarget "HanoriPreviewTests" */;
@@ -196,6 +240,10 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					45C296F39F17AC0B3300E0A6 = {
+						ProvisioningStyle = Automatic;
+						TestTargetID = D2F18F9809AC3E0590F6808B;
+					};
 					9678DCDFD034EC0C6BEC7608 = {
 						ProvisioningStyle = Automatic;
 					};
@@ -220,6 +268,7 @@
 			targets = (
 				D2F18F9809AC3E0590F6808B /* HanoriPreview */,
 				9678DCDFD034EC0C6BEC7608 /* HanoriPreviewTests */,
+				45C296F39F17AC0B3300E0A6 /* HanoriPreviewUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -231,6 +280,8 @@
 			files = (
 				DE4EDFC2701E396916CD87B4 /* HanoriSans-Regular.otf in Resources */,
 				2276D1348C003F37E2873E58 /* HanoriSansFurigana-Regular.otf in Resources */,
+				DEFA65246FDC26743EA592DB /* HanoriSerif-Regular.otf in Resources */,
+				99FAB5A053C4F361345918B7 /* HanoriSerifFurigana-Regular.otf in Resources */,
 				38D05C6DC403971679DDD275 /* licenses in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,6 +294,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8867DF6C44C1ECC81DF1FC8 /* HanoriPreviewTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6FEF341D12988F356D57C75 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A503B90DFA82B262221524E2 /* HanoriPreviewUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,9 +330,34 @@
 			target = D2F18F9809AC3E0590F6808B /* HanoriPreview */;
 			targetProxy = 966704330C03674A0D778941 /* PBXContainerItemProxy */;
 		};
+		E382CC1227FA8BD0BA42DC19 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2F18F9809AC3E0590F6808B /* HanoriPreview */;
+			targetProxy = 8E10E769955DD91DA810F308 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		55C086A92641B6729046F2FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.hanori.HanoriPreviewUITests;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = HanoriPreview;
+			};
+			name = Release;
+		};
 		5D8DEEC79B7EBA03A75FA58E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -285,6 +369,8 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -334,7 +420,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -355,7 +441,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.1.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -402,7 +488,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -417,7 +503,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.1.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -439,6 +525,8 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -450,6 +538,26 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DD4EFBA62AE859DC894CA272 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.hanori.HanoriPreviewUITests;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = HanoriPreview;
 			};
 			name = Debug;
 		};
@@ -498,6 +606,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		33BB258D4CF894237550FF21 /* Build configuration list for PBXNativeTarget "HanoriPreviewUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD4EFBA62AE859DC894CA272 /* Debug */,
+				55C086A92641B6729046F2FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		8303DED1735FBAFEA5B654E2 /* Build configuration list for PBXNativeTarget "HanoriPreview" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

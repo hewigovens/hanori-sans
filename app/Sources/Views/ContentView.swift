@@ -10,30 +10,43 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            GeometryReader { geometry in
-                if geometry.size.width >= 800 {
-                    HStack(spacing: 0) {
-                        ScrollView { ControlsView(settings: $settings) }.frame(width: 310)
-                        Divider()
-                        ScrollView { specimens.padding(24) }
+            VStack(spacing: 0) {
+                Picker("Typeface", selection: $settings.typeface) {
+                    ForEach(PreviewTypeface.allCases) { typeface in
+                        Text(typeface.rawValue).tag(typeface)
                     }
-                } else {
-                    ScrollView {
-                        VStack(spacing: 0) {
-                            DisclosureGroup(isExpanded: $showingControls) {
-                                ControlsView(settings: $settings)
-                            } label: {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text("Text and rendering").font(.headline)
-                                    Text("\(settings.hint.rawValue) · \(Int(settings.pointSize)) pt")
-                                        .font(.caption).foregroundStyle(.secondary)
-                                }
-                            }
-                            .padding(22)
-                            specimens.padding(.horizontal, 16).padding(.bottom, 24)
+                }
+                .pickerStyle(.segmented)
+                .accessibilityIdentifier("typeface")
+                .frame(maxWidth: 320)
+                .padding(18)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                Divider()
+                GeometryReader { geometry in
+                    if geometry.size.width >= 800 {
+                        HStack(spacing: 0) {
+                            ScrollView { ControlsView(settings: $settings) }.frame(width: 310)
+                            Divider()
+                            ScrollView { specimens.padding(24) }
                         }
+                    } else {
+                        ScrollView {
+                            VStack(spacing: 0) {
+                                DisclosureGroup(isExpanded: $showingControls) {
+                                    ControlsView(settings: $settings)
+                                } label: {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("Text and rendering").font(.headline)
+                                        Text("\(settings.hint.rawValue) · \(Int(settings.pointSize)) pt")
+                                            .font(.caption).foregroundStyle(.secondary)
+                                    }
+                                }
+                                .padding(22)
+                                specimens.padding(.horizontal, 16).padding(.bottom, 24)
+                            }
+                        }
+                        .scrollDismissesKeyboard(.interactively)
                     }
-                    .scrollDismissesKeyboard(.interactively)
                 }
             }
             .navigationTitle("Hanori Preview")
@@ -59,7 +72,7 @@ struct ContentView: View {
     private var specimens: some View {
         VStack(alignment: .leading, spacing: 20) {
             Text("One text, two reading modes").font(.title2.weight(.semibold))
-            ForEach(PreviewFace.allCases) { face in
+            ForEach(settings.typeface.faces) { face in
                 SpecimenCard(catalog: catalog, face: face, settings: settings)
             }
             Text("Readings come from a Japanese dictionary and may be wrong. Kana hints apply to whole paragraphs: mixed Chinese and kana within one paragraph can be misclassified.")

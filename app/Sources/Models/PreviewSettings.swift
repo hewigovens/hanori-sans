@@ -1,15 +1,26 @@
 import Foundation
 
+enum PreviewTypeface: String, CaseIterable, Identifiable {
+    case sans = "Sans"
+    case serif = "Serif"
+
+    var id: Self { self }
+    var faces: [PreviewFace] {
+        self == .sans ? [.standard, .furigana] : [.serif, .serifFurigana]
+    }
+}
+
 enum PreviewFace: String, CaseIterable, Identifiable {
     case standard = "Hanori Sans"
     case furigana = "Hanori Sans Furigana"
+    case serif = "Hanori Serif"
+    case serifFurigana = "Hanori Serif Furigana"
 
     var id: Self { self }
-    var fileName: String {
-        self == .standard ? "HanoriSans-Regular" : "HanoriSansFurigana-Regular"
-    }
+    var fileName: String { rawValue.replacingOccurrences(of: " ", with: "") + "-Regular" }
+    var isFurigana: Bool { self == .furigana || self == .serifFurigana }
     var subtitle: String {
-        self == .standard ? "Readings follow the language hint" : "Readings always enabled"
+        isFurigana ? "Readings always enabled" : "Readings follow the language hint"
     }
 }
 
@@ -50,16 +61,17 @@ enum LanguageHint: String, CaseIterable, Identifiable {
         case .kana:
             return "Each paragraph with hiragana or katakana gets a Japanese hint. Han-only paragraphs stay untagged. This is a reading aid, not reliable language detection."
         case .unspecified:
-            return "No language hint is sent. Hanori Sans stays plain, matching the observed English-mode LINE behavior."
+            return "No language hint is sent. The default face stays plain, matching the observed English-mode LINE behavior."
         case .japanese:
             return "All text gets a Japanese hint. Shared Chinese words may also receive Japanese readings."
         case .english, .chinese:
-            return "Hanori Sans stays plain. Hanori Sans Furigana can still add readings to dictionary matches in either language."
+            return "The default face stays plain. The Furigana face can still add readings to dictionary matches in either language."
         }
     }
 }
 
 struct PreviewSettings: Equatable {
+    var typeface = PreviewTypeface.sans
     var text = SampleText.mixed.text
     var hint = LanguageHint.kana
     var pointSize = 32.0

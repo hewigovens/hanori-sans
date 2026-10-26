@@ -9,7 +9,7 @@ final class HanoriPreviewTests: XCTestCase {
         for face in PreviewFace.allCases {
             let font = catalog.font(face, size: 32)
             XCTAssertEqual(CTFontCopyPostScriptName(font) as String, face.fileName)
-            XCTAssertEqual(CTFontCopyName(font, kCTFontVersionNameKey) as String?, "Version 0.102")
+            XCTAssertEqual(CTFontCopyName(font, kCTFontVersionNameKey) as String?, "Version 0.103")
         }
     }
 
@@ -24,23 +24,26 @@ final class HanoriPreviewTests: XCTestCase {
 
     func testDefaultReadingsFollowActualCoreTextLanguageHint() throws {
         let catalog = try FontCatalog()
-        var settings = PreviewSettings()
-        settings.text = "今日は日本語の勉強をします。東京駅"
-        settings.hint = .english
-        let plain = SpecimenLayout(catalog: catalog, face: .standard, settings: settings, width: 1200)
-        settings.hint = .chinese
-        let chinese = SpecimenLayout(catalog: catalog, face: .standard, settings: settings, width: 1200)
-        settings.hint = .japanese
-        let japanese = SpecimenLayout(catalog: catalog, face: .standard, settings: settings, width: 1200)
-        let always = SpecimenLayout(catalog: catalog, face: .furigana, settings: settings, width: 1200)
-        XCTAssertEqual(glyphs(plain), glyphs(chinese))
-        XCTAssertNotEqual(glyphs(plain), glyphs(japanese))
-        XCTAssertEqual(glyphs(japanese), glyphs(always))
-        settings.hint = .english
-        XCTAssertEqual(glyphs(always), glyphs(SpecimenLayout(catalog: catalog, face: .furigana, settings: settings, width: 1200)))
-        for layout in [plain, chinese, japanese, always] {
-            XCTAssertEqual(layout.missingGlyphCount, 0)
-            XCTAssertEqual(layout.fallbackFonts, [])
+        for typeface in PreviewTypeface.allCases {
+            var settings = PreviewSettings()
+            settings.typeface = typeface
+            settings.text = "今日は日本語の勉強をします。東京駅"
+            settings.hint = .english
+            let plain = SpecimenLayout(catalog: catalog, face: typeface.faces[0], settings: settings, width: 1200)
+            settings.hint = .chinese
+            let chinese = SpecimenLayout(catalog: catalog, face: typeface.faces[0], settings: settings, width: 1200)
+            settings.hint = .japanese
+            let japanese = SpecimenLayout(catalog: catalog, face: typeface.faces[0], settings: settings, width: 1200)
+            let always = SpecimenLayout(catalog: catalog, face: typeface.faces[1], settings: settings, width: 1200)
+            XCTAssertEqual(glyphs(plain), glyphs(chinese))
+            XCTAssertNotEqual(glyphs(plain), glyphs(japanese))
+            XCTAssertEqual(glyphs(japanese), glyphs(always))
+            settings.hint = .english
+            XCTAssertEqual(glyphs(always), glyphs(SpecimenLayout(catalog: catalog, face: typeface.faces[1], settings: settings, width: 1200)))
+            for layout in [plain, chinese, japanese, always] {
+                XCTAssertEqual(layout.missingGlyphCount, 0)
+                XCTAssertEqual(layout.fallbackFonts, [])
+            }
         }
     }
 
@@ -77,17 +80,32 @@ final class HanoriPreviewTests: XCTestCase {
 
     func testExportProducesDecodablePNGContainingBothSpecimens() throws {
         let catalog = try FontCatalog()
-        let settings = PreviewSettings()
-        let data = try SpecimenExporter.png(catalog: catalog, settings: settings)
-        let source = try XCTUnwrap(CGImageSourceCreateWithData(data as CFData, nil))
-        let image = try XCTUnwrap(CGImageSourceCreateImageAtIndex(source, 0, nil))
-        XCTAssertEqual(image.width, 1200)
-        let single = SpecimenLayout(catalog: catalog, face: .standard, settings: settings, width: 1200)
-        XCTAssertGreaterThan(CGFloat(image.height), single.size.height * 2)
-        let attachment = XCTAttachment(data: data, uniformTypeIdentifier: "public.png")
-        attachment.name = "Hanori shared renderer"
-        attachment.lifetime = .keepAlways
-        add(attachment)
+        for typeface in PreviewTypeface.allCases {
+            var settings = PreviewSettings()
+            settings.typeface = typeface
+            let data = try SpecimenExporter.png(catalog: catalog, settings: settings)
+            let source = try XCTUnwrap(CGImageSourceCreateWithData(data as CFData, nil))
+            let image = try XCTUnwrap(CGImageSourceCreateImageAtIndex(source, 0, nil))
+            XCTAssertEqual(image.width, 1200)
+            let single = SpecimenLayout(catalog: catalog, face: typeface.faces[0], settings: settings, width: 1200)
+            XCTAssertGreaterThan(CGFloat(image.height), single.size.height * 2)
+            let attachment = XCTAttachment(data: data, uniformTypeIdentifier: "public.png")
+            attachment.name = "Hanori \(typeface.rawValue) shared renderer"
+            attachment.lifetime = .keepAlways
+            add(attachment)
+        }
+    }
+
+    func testSerifAndSansUseDifferentBundledChineseOutlines() throws {
+        let catalog = try FontCatalog()
+        func outline(_ face: PreviewFace) throws -> CGPath {
+            let font = catalog.font(face, size: 40)
+            var character: UniChar = 0x6C38 // 永
+            var glyph: CGGlyph = 0
+            XCTAssertTrue(CTFontGetGlyphsForCharacters(font, &character, &glyph, 1))
+            return try XCTUnwrap(CTFontCreatePathForGlyph(font, glyph, nil))
+        }
+        XCTAssertNotEqual(try outline(.standard), try outline(.serif))
     }
 
     private func glyphs(_ layout: SpecimenLayout) -> [CGGlyph] {

@@ -57,7 +57,7 @@ struct ControlsView: View {
                 }
             }
             Toggle("Show baselines", isOn: $settings.showBaselines)
-            Label("Both fonts are bundled. No installation needed.", systemImage: "checkmark.seal")
+            Label("Fonts are bundled. No installation needed.", systemImage: "checkmark.seal")
                 .font(.caption).foregroundStyle(.secondary)
         }
         .padding(22)

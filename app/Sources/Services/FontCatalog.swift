@@ -26,7 +26,7 @@ final class FontCatalog {
         case unavailable(String)
         var errorDescription: String? {
             switch self {
-            case .unavailable(let name): return "The bundled file for \(name) is missing or invalid. Rebuild the app with both fonts from dist/."
+            case .unavailable(let name): return "The bundled file for \(name) is missing or invalid. Rebuild the app with all four fonts from dist/."
             }
         }
     }

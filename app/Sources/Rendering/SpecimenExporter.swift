@@ -4,7 +4,7 @@ import UniformTypeIdentifiers
 
 enum SpecimenExporter {
     static func png(catalog: FontCatalog, settings: PreviewSettings, width: Int = 1200) throws -> Data {
-        let layouts = PreviewFace.allCases.map {
+        let layouts = settings.typeface.faces.map {
             SpecimenLayout(catalog: catalog, face: $0, settings: settings, width: CGFloat(width))
         }
         let height = Int(ceil(100 + layouts.reduce(0) { $0 + $1.size.height + 80 }))
@@ -36,7 +36,7 @@ enum SpecimenExporter {
         label("Hanori Preview", top: 20, size: 28)
         label("\(settings.hint.rawValue) · \(Int(settings.pointSize)) pt · \(settings.lineHeight.formatted(.number.precision(.fractionLength(1))))× line height", top: 58, size: 16)
         var top: CGFloat = 110
-        for (face, layout) in zip(PreviewFace.allCases, layouts) {
+        for (face, layout) in zip(settings.typeface.faces, layouts) {
             label(face.rawValue, top: top, size: 22)
             top += 40
             context.saveGState()

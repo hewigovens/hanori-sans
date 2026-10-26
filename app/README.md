@@ -1,6 +1,6 @@
 # Hanori Preview
 
-A shared SwiftUI app for iOS 17+ and macOS 14+. It loads both OTFs directly from
+A shared SwiftUI app for iOS 17+ and macOS 14+. It loads all four OTFs directly from
 the app bundle, including when a different Hanori version is installed on the
 Mac. It does not install fonts system-wide or need network access.
 
@@ -22,11 +22,12 @@ from `app/project.yml` when installed; Xcode alone can open the existing project
 
 ## Use
 
-Both cards display the same editable text. Samples cover English, Simplified
-Chinese, Japanese, and ambiguous shared Han words. Font size, baseline spacing,
+Choose Sans or Serif with the typeface selector. Both cards display the same
+editable text. Samples cover English, Simplified Chinese, Japanese, and ambiguous
+shared Han words. Font size, baseline spacing,
 and baseline guides apply to both cards. **Export PNG** saves a 1200-pixel-wide
-specimen of both fonts using the same renderer as the live cards. PNG exports
-use dark text on white; the app follows the device's Light/Dark appearance.
+specimen of the selected design’s two reading modes using the same renderer as
+the live cards. PNG exports use dark text on white; the app follows the device's Light/Dark appearance.
 
 Language hints:
 
@@ -38,8 +39,8 @@ Language hints:
 | Simplified Chinese | `zh-Hans` |
 | Japanese | `ja` |
 
-The default **Hanori Sans** enables readings only with a Japanese hint.
-**Hanori Sans Furigana** keeps dictionary readings enabled in all modes.
+The default **Hanori Sans** and **Hanori Serif** enable readings only with a Japanese
+hint. Their **Furigana** siblings keep dictionary readings enabled in all modes.
 The app sets [`kCTLanguageAttributeName`](https://developer.apple.com/documentation/coretext/kctlanguageattributename)
 on each paragraph before Core Text shapes and wraps the text.
 
@@ -58,16 +59,23 @@ xcodegen generate --spec app/project.yml
 # Native macOS app and renderer tests.
 xcodebuild -project app/HanoriPreview.xcodeproj -scheme HanoriPreview \
   -destination 'platform=macOS' -derivedDataPath build/apple \
-  CODE_SIGNING_ALLOWED=NO test
+  CODE_SIGNING_ALLOWED=NO -only-testing:HanoriPreviewTests test
 
 # iOS Simulator: replace the device name with an available simulator.
 xcodebuild -project app/HanoriPreview.xcodeproj -scheme HanoriPreview \
-  -destination 'platform=iOS Simulator,name=iPhone 18 Pro' \
+  -destination 'platform=iOS Simulator,name=iPhone 18 Pro Max' \
   -derivedDataPath build/ios CODE_SIGNING_ALLOWED=NO test
+
+# Physical iPhone: supply your device UDID and signing team locally.
+xcodebuild -project app/HanoriPreview.xcodeproj -scheme HanoriPreview \
+  -destination 'platform=iOS,id=YOUR_DEVICE_UDID' -derivedDataPath build/phone \
+  DEVELOPMENT_TEAM=YOUR_TEAM_ID -allowProvisioningUpdates test
 ```
 
-The shared tests load the bundled fonts, exercise actual Core Text glyph
-selection across language hints, verify per-paragraph kana handling and narrow
-wrapping, and decode an exported PNG. The PNG is retained as a test attachment.
+The shared tests load all four bundled fonts, check distinct Sans/Serif outlines,
+and exercise actual Core Text glyph selection across language hints, verify
+per-paragraph kana handling and narrow wrapping, and decode an exported PNG.
+The PNG exports for both designs are retained as test attachments. The UI test
+switches to Serif and retains screenshots of its default and Furigana cards.
 These checks complement the font build's `npm run verify`; they do not prove
 another app's shaping, fallback, or line-height behavior.

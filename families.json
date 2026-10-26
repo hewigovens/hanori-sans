@@ -1,0 +1,22 @@
+[
+  {
+    "id": "sans",
+    "name": "Hanori Sans",
+    "latin": "InterVariable.ttf",
+    "latinName": "Inter",
+    "cjk": "SourceHanSansCN-Regular.otf",
+    "cjkName": "Source Han Sans CN",
+    "axes": {"wght": 400, "opsz": 14},
+    "credits": "Adobe (Source Han Sans); Rasmus Andersson (Inter); Hanori project (composition)"
+  },
+  {
+    "id": "serif",
+    "name": "Hanori Serif",
+    "latin": "SourceSerif4-Regular.otf",
+    "latinName": "Source Serif 4",
+    "cjk": "SourceHanSerifCN-Regular.otf",
+    "cjkName": "Source Han Serif CN",
+    "axes": {},
+    "credits": "Adobe (Source Serif 4; Source Han Serif); Hanori project (composition)"
+  }
+]

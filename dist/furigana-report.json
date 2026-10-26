@@ -1,5 +1,5 @@
 {
-  "version": "0.1.2",
+  "version": "0.1.3",
   "compiler": "furifont@0.6.2",
   "config": {
     "family": "Hanori Sans Furigana",
@@ -34,11 +34,11 @@
       "compressionFloor": 0.8,
       "maxRubyWidth": 1.5
     },
-    "base": "build/HanoriBase-Regular.otf",
+    "base": "build/HanoriSansBase-Regular.otf",
     "formats": [
       "otf"
     ],
-    "version": "0.1.2"
+    "version": "0.1.3"
   },
   "stats": {
     "candidates": 233904,
@@ -55,7 +55,7 @@
   "files": [
     {
       "name": "HanoriSansFurigana-Regular.otf",
-      "bytes": 32809136
+      "bytes": 32804780
     },
     {
       "name": "HanoriSansFurigana-Regular.ivs.json",

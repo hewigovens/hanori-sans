@@ -2,19 +2,30 @@ import Foundation
 import CoreText
 
 let root = URL(fileURLWithPath: CommandLine.arguments[1], isDirectory: true)
-for relativePath in ["dist/HanoriSans-Regular.otf", "dist/HanoriSansFurigana-Regular.otf", "build/HanoriBase-Regular.otf"] {
-    var error: Unmanaged<CFError>?
-    precondition(CTFontManagerRegisterFontsForURL(root.appendingPathComponent(relativePath) as CFURL, .process, &error))
+let familyID = CommandLine.arguments.count > 2 ? CommandLine.arguments[2] : "sans"
+let families = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("families.json"))) as! [[String: Any]]
+let family = families.first { $0["id"] as? String == familyID }!
+let familyName = family["name"] as! String
+let stem = familyName.replacingOccurrences(of: " ", with: "")
+let prefix = familyID == "sans" ? "" : familyID + "-"
+let package = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("package.json"))) as! [String: Any]
+let version = (package["version"] as! String).split(separator: ".").map { Int($0)! }
+let expectedVersion = String(format: "Version %d.%d%02d", version[0], version[1], version[2])
+let name = stem + "-Regular"
+let furiganaName = stem + "Furigana-Regular"
+let baseName = stem + "Base-Regular"
+var fonts: [String: CGFont] = [:]
+for (fontName, folder) in [(name, "dist"), (furiganaName, "dist"), (baseName, "build")] {
+    let url = root.appendingPathComponent("\(folder)/\(fontName).otf")
+    fonts[fontName] = CGFont(CGDataProvider(url: url as CFURL)!)!
 }
-let name = "HanoriSans-Regular"
-let font = CTFontCreateWithName(name as CFString, 40, nil)
-precondition(CTFontCopyPostScriptName(font) as String == name)
-precondition(CTFontCopyName(font, kCTFontVersionNameKey) as String? == "Version 0.102", "Wrong default font version")
-let baseReport = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("dist/base-report.json"))) as! [String: Int]
-let baseGlyphCount = baseReport["glyph_count"]!
+let font = CTFontCreateWithGraphicsFont(fonts[name]!, 40, nil, nil)
+precondition(CTFontCopyName(font, kCTFontVersionNameKey) as String? == expectedVersion, "Wrong default font version")
+let baseReport = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("dist/\(prefix)base-report.json"))) as! [String: Any]
+let baseGlyphCount = baseReport["glyph_count"] as! Int
 
 func glyphIDs(_ text: String, name: String, language: String?) -> [CGGlyph] {
-    let chosen = CTFontCreateWithName(name as CFString, 40, nil)
+    let chosen = CTFontCreateWithGraphicsFont(fonts[name]!, 40, nil, nil)
     var attributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTFontAttributeName as String): chosen]
     if let language { attributes[NSAttributedString.Key(kCTLanguageAttributeName as String)] = language }
     let line = CTLineCreateWithAttributedString(NSAttributedString(string: text, attributes: attributes))
@@ -46,14 +57,14 @@ for language in [nil, "en", "zh-Hans", "ja"] as [String?] {
         }
         if language == "ja" {
             precondition(annotated > 0, "Japanese hint did not activate ruby")
-            precondition(glyphIDs(text, name: name, language: language) == glyphIDs(text, name: "HanoriSansFurigana-Regular", language: language), "Japanese-hinted default differs from Furigana face")
+            precondition(glyphIDs(text, name: name, language: language) == glyphIDs(text, name: furiganaName, language: language), "Japanese-hinted default differs from Furigana face")
         } else {
             precondition(annotated == 0, "Readings appeared without a Japanese hint")
-            precondition(glyphIDs(text, name: name, language: language) == glyphIDs(text, name: "HanoriSansBase-Regular", language: language), "Default without a Japanese hint differs from plain base")
+            precondition(glyphIDs(text, name: name, language: language) == glyphIDs(text, name: baseName, language: language), "Default without a Japanese hint differs from plain base")
         }
         output.append(["language": language ?? "unspecified", "text": text, "annotatedGlyphs": annotated])
     }
 }
 let data = try JSONSerialization.data(withJSONObject: output, options: [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes])
-try data.write(to: root.appendingPathComponent("dist/default-language-report.json"))
-print("Hanori Sans default passed: plain base glyphs for Chinese, English, and missing hints; Furigana face glyphs for Japanese hints.")
+try data.write(to: root.appendingPathComponent("dist/\(prefix)default-language-report.json"))
+print("\(familyName) default passed: plain base glyphs for Chinese, English, and missing hints; Furigana face glyphs for Japanese hints.")

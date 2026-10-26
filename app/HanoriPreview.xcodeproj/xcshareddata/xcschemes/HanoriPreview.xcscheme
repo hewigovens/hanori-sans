@@ -50,6 +50,17 @@
                ReferencedContainer = "container:HanoriPreview.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "45C296F39F17AC0B3300E0A6"
+               BuildableName = "HanoriPreviewUITests.xctest"
+               BlueprintName = "HanoriPreviewUITests"
+               ReferencedContainer = "container:HanoriPreview.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <CommandLineArguments>
       </CommandLineArguments>
