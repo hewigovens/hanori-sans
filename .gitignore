@@ -11,6 +11,8 @@ __pycache__/
 /*.zip
 /dist/installed-fonts.json
 /dist/install-upgrade.json
-/diagnostics/kana-context/work/
-/diagnostics/kana-context/cleanup.json
+xcuserdata/
+*.xcuserstate
+*.xcresult/
+.xcodebuildmcp/
 .DS_Store

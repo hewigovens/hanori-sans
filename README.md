@@ -3,7 +3,7 @@
 A personal font prototype for English, Simplified Chinese, and Japanese reading.
 
 Built fonts and validation reports are in [`dist/`](dist/). The repository also
-includes pinned source fonts, build scripts, licenses, and rendering diagnostics.
+includes pinned source fonts, build scripts, licenses, and an iOS/macOS preview app.
 
 ![Hanori Sans and Hanori Sans Furigana specimen](dist/specimen.png)
 
@@ -36,6 +36,24 @@ Sample Japanese: 今日は日本語の勉強をします。東京駅で友達に
 
 Sample Chinese: 今天的中文字体清晰，汉字宽度保持一致。骨直令遍返。
 
+## Preview on iOS and macOS
+
+Open [`app/HanoriPreview.xcodeproj`](app/HanoriPreview.xcodeproj) in Xcode and
+run **HanoriPreview** on My Mac, an iPhone, or an iPad simulator. The shared
+SwiftUI app bundles both fonts; no font installation is required. Minimum
+versions are iOS 17 and macOS 14.
+
+- Edit text or choose English, Chinese, Japanese, and ambiguous Han samples.
+- Compare both families with explicit language hints or a per-paragraph kana hint.
+- Adjust font size and line height, show baselines, and export both renders as PNG.
+
+The kana mode runs in the app: paragraphs containing hiragana or katakana get
+a Japanese language hint, while Han-only paragraphs stay untagged. It does not
+change how LINE or other apps detect languages.
+
+On macOS, `./script/build_and_run.sh` builds and opens the app. See
+[`app/README.md`](app/README.md) for build and test commands.
+
 ## Furigana behavior
 
 FuriFont's dictionary and OpenType rules supply readings without changing the
@@ -59,8 +77,7 @@ readings.
 In the LINE trial, both Chinese and Japanese stayed plain with this behavior.
 The tested English-mode LINE path did not supply usable Japanese hints.
 Follow-up testing with LINE's bundled Qt 6.6.3 renderer also found that kana
-context rules cannot see across Han/kana shaping boundaries. See
-`diagnostics/kana-context/README.md` for the controlled test and saved results.
+context rules cannot see across Han/kana shaping boundaries.
 Use **Hanori Sans Furigana** when you want readings in LINE; shared Chinese words
 can receive Japanese readings in that family.
 
@@ -89,9 +106,10 @@ must match the always-on Furigana face. Results are recorded in
 The original Furigana face displayed readings in LINE in the user's trial,
 including on Chinese words. The selective behavior now used by the default
 stayed plain for both languages.
-The native automated checks and isolated Qt checks are distinct evidence; iOS
-app integration remains untested. There is no bundled emoji font; emoji and
-unsupported rare characters depend on the app's normal fallback behavior.
+The preview app uses native Core Text on both platforms. Its tests check
+language-dependent glyph selection, kana hints, wrapping, and PNG rendering.
+There is no bundled emoji font; emoji and unsupported rare characters depend
+on the app's normal fallback behavior.
 
 ## Rebuild
 

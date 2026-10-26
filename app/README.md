@@ -1,0 +1,73 @@
+# Hanori Preview
+
+A shared SwiftUI app for iOS 17+ and macOS 14+. It loads both OTFs directly from
+the app bundle, including when a different Hanori version is installed on the
+Mac. It does not install fonts system-wide or need network access.
+
+## Run
+
+Open `HanoriPreview.xcodeproj`, select the **HanoriPreview** scheme, and choose
+**My Mac** or an iPhone/iPad simulator. For a physical iOS device, select your
+own signing team in Xcode.
+
+From the repository root, the macOS entrypoint is:
+
+```sh
+./script/build_and_run.sh
+```
+
+It also supports `--verify`, `--debug`, `--logs`, and `--telemetry`. The Codex
+Run action uses this script. XcodeGen 2.46+ regenerates the checked-in project
+from `app/project.yml` when installed; Xcode alone can open the existing project.
+
+## Use
+
+Both cards display the same editable text. Samples cover English, Simplified
+Chinese, Japanese, and ambiguous shared Han words. Font size, baseline spacing,
+and baseline guides apply to both cards. **Export PNG** saves a 1200-pixel-wide
+specimen of both fonts using the same renderer as the live cards. PNG exports
+use dark text on white; the app follows the device's Light/Dark appearance.
+
+Language hints:
+
+| Mode | Hint supplied to Core Text |
+| --- | --- |
+| Kana hint | `ja` for each paragraph containing kana; otherwise none |
+| No hint | None |
+| English | `en` |
+| Simplified Chinese | `zh-Hans` |
+| Japanese | `ja` |
+
+The default **Hanori Sans** enables readings only with a Japanese hint.
+**Hanori Sans Furigana** keeps dictionary readings enabled in all modes.
+The app sets [`kCTLanguageAttributeName`](https://developer.apple.com/documentation/coretext/kctlanguageattributename)
+on each paragraph before Core Text shapes and wraps the text.
+
+Kana hints are a heuristic. Han-only Japanese stays plain, and Chinese quoting
+kana in the same paragraph can receive Japanese readings. These controls test
+app-provided hints; they do not add detection to the font or to LINE.
+
+## Build and test
+
+Run these commands from the repository root:
+
+```sh
+# Regenerate after editing project.yml (requires XcodeGen).
+xcodegen generate --spec app/project.yml
+
+# Native macOS app and renderer tests.
+xcodebuild -project app/HanoriPreview.xcodeproj -scheme HanoriPreview \
+  -destination 'platform=macOS' -derivedDataPath build/apple \
+  CODE_SIGNING_ALLOWED=NO test
+
+# iOS Simulator: replace the device name with an available simulator.
+xcodebuild -project app/HanoriPreview.xcodeproj -scheme HanoriPreview \
+  -destination 'platform=iOS Simulator,name=iPhone 18 Pro' \
+  -derivedDataPath build/ios CODE_SIGNING_ALLOWED=NO test
+```
+
+The shared tests load the bundled fonts, exercise actual Core Text glyph
+selection across language hints, verify per-paragraph kana handling and narrow
+wrapping, and decode an exported PNG. The PNG is retained as a test attachment.
+These checks complement the font build's `npm run verify`; they do not prove
+another app's shaping, fallback, or line-height behavior.
