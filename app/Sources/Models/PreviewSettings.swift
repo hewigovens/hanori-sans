@@ -59,13 +59,13 @@ enum LanguageHint: String, CaseIterable, Identifiable {
     var explanation: String {
         switch self {
         case .kana:
-            return "Each paragraph with hiragana or katakana gets a Japanese hint. Han-only paragraphs stay untagged. This is a reading aid, not reliable language detection."
+            return "Paragraphs containing kana get Japanese readings. Han-only paragraphs stay plain; mixed-language paragraphs can be misclassified."
         case .unspecified:
-            return "No language hint is sent. The default face stays plain, matching the observed English-mode LINE behavior."
+            return "The default face stays plain. The Furigana face still offers dictionary readings."
         case .japanese:
             return "All text gets a Japanese hint. Shared Chinese words may also receive Japanese readings."
         case .english, .chinese:
-            return "The default face stays plain. The Furigana face can still add readings to dictionary matches in either language."
+            return "The default face stays plain. The Furigana face may add Japanese readings to shared Chinese words."
         }
     }
 }

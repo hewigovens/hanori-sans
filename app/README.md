@@ -22,12 +22,18 @@ from `app/project.yml` when installed; Xcode alone can open the existing project
 
 ## Use
 
-Choose Sans or Serif with the typeface selector. Both cards display the same
-editable text. Samples cover English, Simplified Chinese, Japanese, and ambiguous
-shared Han words. Font size, baseline spacing,
-and baseline guides apply to both cards. **Export PNG** saves a 1200-pixel-wide
-specimen of the selected design’s two reading modes using the same renderer as
-the live cards. PNG exports use dark text on white; the app follows the device's Light/Dark appearance.
+Choose Sans or Serif with the typeface selector. Each design shows
+its default and always-on Furigana faces with the same text.
+
+On iOS, **Text** opens a focused editor with a Samples menu. Changes appear in
+both previews. **Appearance** opens a grouped form for text language, font size,
+line spacing, and baseline guides; Reset appearance restores those settings
+without replacing the text or selected design. A compact summary stays above
+the previews. The Mac keeps these controls in its sidebar.
+
+**Export PNG** saves a 1200-pixel-wide specimen of the selected design's two
+reading modes using the same renderer as the live cards. PNG exports use dark
+text on white; the app follows the device's Light/Dark appearance.
 
 Language hints:
 
@@ -77,5 +83,14 @@ and exercise actual Core Text glyph selection across language hints, verify
 per-paragraph kana handling and narrow wrapping, and decode an exported PNG.
 The PNG exports for both designs are retained as test attachments. The UI test
 switches to Serif and retains screenshots of its default and Furigana cards.
+The iOS flow test also selects a sample, edits text, changes appearance settings,
+and checks the resulting preview.
 These checks complement the font build's `npm run verify`; they do not prove
 another app's shaping, fallback, or line-height behavior.
+
+## App icon
+
+The icon combines 文 with the furigana ぶん on an ink-teal background. App-icon
+masters and Retina sizes are in `Assets.xcassets/AppIcon.appiconset/`. The iOS
+master is opaque; the macOS variant has a transparent margin and rounded tile.
+The shared accent color includes Light and Dark appearances.

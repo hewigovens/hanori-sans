@@ -49,6 +49,7 @@ four fonts and loads the bundled bytes directly; no font installation is needed.
 Minimum versions are iOS 17 and macOS 14.
 
 - Switch between Sans and Serif; each design shows its two reading modes.
+- On iOS, use **Text** for the editor and samples, and **Appearance** for rendering controls.
 - Edit text or choose English, Chinese, Japanese, and ambiguous Han samples.
 - Choose explicit language hints or a per-paragraph kana hint.
 - Adjust font size and line height, show baselines, and export the selected pair as PNG.

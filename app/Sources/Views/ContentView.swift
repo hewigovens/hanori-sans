@@ -6,54 +6,19 @@ struct ContentView: View {
     @State private var document: PNGDocument?
     @State private var exporting = false
     @State private var exportError: String?
-    @State private var showingControls = false
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                Picker("Typeface", selection: $settings.typeface) {
-                    ForEach(PreviewTypeface.allCases) { typeface in
-                        Text(typeface.rawValue).tag(typeface)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .accessibilityIdentifier("typeface")
-                #if os(macOS)
-                .frame(maxWidth: 320)
+            Group {
+                #if os(iOS)
+                MobilePreviewView(catalog: catalog, settings: $settings)
+                    .navigationTitle("Hanori")
+                    .navigationBarTitleDisplayMode(.inline)
                 #else
-                .frame(maxWidth: .infinity)
+                desktopPreview
+                    .navigationTitle("Hanori Preview")
                 #endif
-                .padding(18)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                Divider()
-                GeometryReader { geometry in
-                    if geometry.size.width >= 800 {
-                        HStack(spacing: 0) {
-                            ScrollView { ControlsView(settings: $settings) }.frame(width: 310)
-                            Divider()
-                            ScrollView { specimens.padding(24) }
-                        }
-                    } else {
-                        ScrollView {
-                            VStack(spacing: 0) {
-                                DisclosureGroup(isExpanded: $showingControls) {
-                                    ControlsView(settings: $settings)
-                                } label: {
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        Text("Text and rendering").font(.headline)
-                                        Text("\(settings.hint.rawValue) · \(Int(settings.pointSize)) pt")
-                                            .font(.caption).foregroundStyle(.secondary)
-                                    }
-                                }
-                                .padding(22)
-                                specimens.padding(.horizontal, 16).padding(.bottom, 24)
-                            }
-                        }
-                        .scrollDismissesKeyboard(.interactively)
-                    }
-                }
             }
-            .navigationTitle("Hanori Preview")
             .toolbar {
                 Button("Export PNG", systemImage: "square.and.arrow.up", action: export)
                     .accessibilityIdentifier("export-png")
@@ -73,17 +38,30 @@ struct ContentView: View {
         } message: { Text(exportError ?? "") }
     }
 
-    private var specimens: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text("One text, two reading modes").font(.title2.weight(.semibold))
-            ForEach(settings.typeface.faces) { face in
-                SpecimenCard(catalog: catalog, face: face, settings: settings)
+    #if os(macOS)
+    private var desktopPreview: some View {
+        VStack(spacing: 0) {
+            Picker("Typeface", selection: $settings.typeface) {
+                ForEach(PreviewTypeface.allCases) { typeface in
+                    Text(typeface.rawValue).tag(typeface)
+                }
             }
-            Text("Readings come from a Japanese dictionary and may be wrong. Kana hints apply to whole paragraphs: mixed Chinese and kana within one paragraph can be misclassified.")
-                .font(.caption).foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+            .pickerStyle(.segmented)
+            .accessibilityIdentifier("typeface")
+            .frame(maxWidth: 320)
+            .padding(18)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            Divider()
+            HStack(spacing: 0) {
+                ScrollView { ControlsView(settings: $settings) }.frame(width: 310)
+                Divider()
+                ScrollView {
+                    SpecimenList(catalog: catalog, settings: settings).padding(24)
+                }
+            }
         }
     }
+    #endif
 
     private func export() {
         do {

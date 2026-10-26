@@ -11,10 +11,16 @@
 		084D27C0D246A3B8D003653C /* SpecimenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD44E29379DF3BF3B6826E1 /* SpecimenView.swift */; };
 		1487E5A41D20AE9E7D73A5CA /* SpecimenCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875132FF534362100386604A /* SpecimenCard.swift */; };
 		2276D1348C003F37E2873E58 /* HanoriSansFurigana-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02D177486611F15A5E5F0263 /* HanoriSansFurigana-Regular.otf */; };
+		28FDCE2A69B87BD35134981F /* SampleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9259DBF8BCBB2F8FE82EA9 /* SampleMenu.swift */; };
+		34003E5BF29ABAC79205882F /* SpecimenList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FB72802A46048936D4635E /* SpecimenList.swift */; };
 		34EFB65DCAA785D7E36779E4 /* SpecimenExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F74B6852A7C6159510395F /* SpecimenExporter.swift */; };
 		38D05C6DC403971679DDD275 /* licenses in Resources */ = {isa = PBXBuildFile; fileRef = E4E34A262F434246C09B3E53 /* licenses */; };
 		399F36C7CD211693E90D9A4C /* HanoriPreviewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17E1EED429C504960154F8D /* HanoriPreviewApp.swift */; };
+		3EE63BDED4717AD5160DB599 /* TypographyControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A375F5FCFA3F0B25DA35A0E /* TypographyControls.swift */; };
+		5F1712E2D75417458F703EDF /* MobilePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586118AF3C04A5D50FF22E6 /* MobilePreviewView.swift */; };
 		6032499E1CE53DEF2F0CA396 /* SpecimenLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF20EF70A8D7C92D8A05B0B /* SpecimenLayout.swift */; };
+		6CEAA0868925726A3B3BB5F1 /* TextEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE9FBBEC02E072406A24D96 /* TextEditorSheet.swift */; };
+		6E25B9E463F2241BE504FCB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F480AA9D6419FF874C113906 /* Assets.xcassets */; };
 		7A763BAB336C8F8F2D853103 /* PreviewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606FEA14594DA25A6939BF5A /* PreviewSettings.swift */; };
 		99FAB5A053C4F361345918B7 /* HanoriSerifFurigana-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A1B5F0C6FBB77B379CB44D25 /* HanoriSerifFurigana-Regular.otf */; };
 		9AF5B16A93529194D876F95A /* PNGDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6866D0615AF80D6236CF15A /* PNGDocument.swift */; };
@@ -24,6 +30,7 @@
 		DA9AD47354C9F7E60115C438 /* FontCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5758067EDE97AEE0627CA101 /* FontCatalog.swift */; };
 		DE4EDFC2701E396916CD87B4 /* HanoriSans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BB653529FC458B1849E5F0BE /* HanoriSans-Regular.otf */; };
 		DEFA65246FDC26743EA592DB /* HanoriSerif-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 14008731DA13C7B199F31999 /* HanoriSerif-Regular.otf */; };
+		EC70A63539CFEFA12537F2EA /* AppearanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F70EA79D96303951FC21BF8 /* AppearanceSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,11 +56,15 @@
 		14008731DA13C7B199F31999 /* HanoriSerif-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HanoriSerif-Regular.otf"; sourceTree = "<group>"; };
 		246BDBFC9C9F3E751C5CF2C4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3BD44E29379DF3BF3B6826E1 /* SpecimenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecimenView.swift; sourceTree = "<group>"; };
+		55FB72802A46048936D4635E /* SpecimenList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecimenList.swift; sourceTree = "<group>"; };
 		5758067EDE97AEE0627CA101 /* FontCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontCatalog.swift; sourceTree = "<group>"; };
+		5F70EA79D96303951FC21BF8 /* AppearanceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSheet.swift; sourceTree = "<group>"; };
 		606FEA14594DA25A6939BF5A /* PreviewSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSettings.swift; sourceTree = "<group>"; };
 		61EF546813C8FE81BA9C2162 /* HanoriPreviewUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = HanoriPreviewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A874A7E9A55F775FD0A2C0D /* HanoriPreview.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HanoriPreview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		875132FF534362100386604A /* SpecimenCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecimenCard.swift; sourceTree = "<group>"; };
+		8C9259DBF8BCBB2F8FE82EA9 /* SampleMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleMenu.swift; sourceTree = "<group>"; };
+		9A375F5FCFA3F0B25DA35A0E /* TypographyControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypographyControls.swift; sourceTree = "<group>"; };
 		A1B5F0C6FBB77B379CB44D25 /* HanoriSerifFurigana-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HanoriSerifFurigana-Regular.otf"; sourceTree = "<group>"; };
 		B17E1EED429C504960154F8D /* HanoriPreviewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanoriPreviewApp.swift; sourceTree = "<group>"; };
 		BB653529FC458B1849E5F0BE /* HanoriSans-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HanoriSans-Regular.otf"; sourceTree = "<group>"; };
@@ -63,7 +74,10 @@
 		DEF20EF70A8D7C92D8A05B0B /* SpecimenLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecimenLayout.swift; sourceTree = "<group>"; };
 		E3D606D6718E5540679E0578 /* HanoriPreviewTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = HanoriPreviewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4E34A262F434246C09B3E53 /* licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; name = licenses; path = ../licenses; sourceTree = SOURCE_ROOT; };
+		F480AA9D6419FF874C113906 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F586118AF3C04A5D50FF22E6 /* MobilePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobilePreviewView.swift; sourceTree = "<group>"; };
 		F5F74B6852A7C6159510395F /* SpecimenExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecimenExporter.swift; sourceTree = "<group>"; };
+		FEE9FBBEC02E072406A24D96 /* TextEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -97,6 +111,16 @@
 			path = ../dist;
 			sourceTree = "<group>";
 		};
+		44E2BE41CA78BB5C97A2FADD /* Mobile */ = {
+			isa = PBXGroup;
+			children = (
+				5F70EA79D96303951FC21BF8 /* AppearanceSheet.swift */,
+				F586118AF3C04A5D50FF22E6 /* MobilePreviewView.swift */,
+				FEE9FBBEC02E072406A24D96 /* TextEditorSheet.swift */,
+			);
+			path = Mobile;
+			sourceTree = "<group>";
+		};
 		5436C71691EC1AA8F3D6890A /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +132,7 @@
 		5C3B1F5DAE9BEB042DFCFDEC = {
 			isa = PBXGroup;
 			children = (
+				F480AA9D6419FF874C113906 /* Assets.xcassets */,
 				E4E34A262F434246C09B3E53 /* licenses */,
 				3AD8B61DB04F7AD1D10785B6 /* dist */,
 				F4AED4675A65E5064543437E /* Sources */,
@@ -123,8 +148,12 @@
 				246BDBFC9C9F3E751C5CF2C4 /* ContentView.swift */,
 				CD9A22617A27E383036D6565 /* ControlsView.swift */,
 				D6866D0615AF80D6236CF15A /* PNGDocument.swift */,
+				8C9259DBF8BCBB2F8FE82EA9 /* SampleMenu.swift */,
 				875132FF534362100386604A /* SpecimenCard.swift */,
+				55FB72802A46048936D4635E /* SpecimenList.swift */,
 				3BD44E29379DF3BF3B6826E1 /* SpecimenView.swift */,
+				9A375F5FCFA3F0B25DA35A0E /* TypographyControls.swift */,
+				44E2BE41CA78BB5C97A2FADD /* Mobile */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -278,6 +307,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E25B9E463F2241BE504FCB7 /* Assets.xcassets in Resources */,
 				DE4EDFC2701E396916CD87B4 /* HanoriSans-Regular.otf in Resources */,
 				2276D1348C003F37E2873E58 /* HanoriSansFurigana-Regular.otf in Resources */,
 				DEFA65246FDC26743EA592DB /* HanoriSerif-Regular.otf in Resources */,
@@ -309,16 +339,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC70A63539CFEFA12537F2EA /* AppearanceSheet.swift in Sources */,
 				015A6F001760411E3D95E6BF /* ContentView.swift in Sources */,
 				CDAFFAA4595889AD65E3620C /* ControlsView.swift in Sources */,
 				DA9AD47354C9F7E60115C438 /* FontCatalog.swift in Sources */,
 				399F36C7CD211693E90D9A4C /* HanoriPreviewApp.swift in Sources */,
+				5F1712E2D75417458F703EDF /* MobilePreviewView.swift in Sources */,
 				9AF5B16A93529194D876F95A /* PNGDocument.swift in Sources */,
 				7A763BAB336C8F8F2D853103 /* PreviewSettings.swift in Sources */,
+				28FDCE2A69B87BD35134981F /* SampleMenu.swift in Sources */,
 				1487E5A41D20AE9E7D73A5CA /* SpecimenCard.swift in Sources */,
 				34EFB65DCAA785D7E36779E4 /* SpecimenExporter.swift in Sources */,
 				6032499E1CE53DEF2F0CA396 /* SpecimenLayout.swift in Sources */,
+				34003E5BF29ABAC79205882F /* SpecimenList.swift in Sources */,
 				084D27C0D246A3B8D003653C /* SpecimenView.swift in Sources */,
+				6CEAA0868925726A3B3BB5F1 /* TextEditorSheet.swift in Sources */,
+				3EE63BDED4717AD5160DB599 /* TypographyControls.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +398,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_USER_SELECTED_FILES = readwrite;
@@ -420,7 +457,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -488,7 +525,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -518,6 +555,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_USER_SELECTED_FILES = readwrite;
