@@ -11,7 +11,8 @@ Font prototypes for English, Simplified Chinese, and Japanese reading, with
 | Hanori Serif Furigana | Same Serif design | Always enabled |
 
 Built fonts and validation reports are in [`dist/`](dist/). The repository also
-includes pinned source fonts, build scripts, licenses, and an iOS/macOS preview app.
+includes pinned source fonts, TypeScript tooling, licenses, and a native SwiftUI
+preview app for iOS and macOS.
 All four fonts are static Regular-weight OpenType fonts.
 
 ![Hanori Sans specimen](dist/specimen.png)
@@ -58,7 +59,7 @@ The kana mode runs in the app. Each paragraph containing hiragana or katakana
 gets a Japanese language hint; Han-only paragraphs stay untagged. It does not
 add language detection to the font or to other apps.
 
-On macOS, `./script/build_and_run.sh` builds and opens the app. See
+On macOS, `npm run app` builds and opens the app. See
 [`app/README.md`](app/README.md) for build and test commands, including physical iOS devices.
 
 ## Furigana behavior
@@ -92,35 +93,44 @@ the app's normal fallback behavior.
 [`families.json`](families.json) defines both compositions. Internal plain bases
 are written to `build/HanoriSansBase-Regular.otf` and
 `build/HanoriSerifBase-Regular.otf`. FuriFont compiles each always-on face, then
-`scripts/build_default.py` restricts automatic readings to Japanese hints for
-its default sibling. Only the four public faces are written to `dist/`.
+the TypeScript tools in [`tools/`](tools/) restrict automatic readings to Japanese
+hints for each default sibling. Only the four public faces are written to `dist/`.
 
-`npm run verify` checks saved tables, coverage, sorted layout coverages, full-width
-Han advances, Chinese source outlines, Latin source metrics, CFF/hmtx consistency,
-and embedding flags. Native Core Text checks confirm language-hint behavior for
-both designs, compare Latin kerning with the source fonts, and render both
-specimens. Reports are saved beside the fonts.
+`npm run verify` checks saved table checksums, coverage, sorted layout and pair
+records, full-width Han advances, every Chinese Han outline, Latin source metrics,
+CFF/hmtx consistency, and embedding flags. HarfBuzz checks language-dependent
+readings and Latin kerning. Build and validation reports are saved beside the fonts.
 
-The app tests bundled-font loading, distinct Sans/Serif Chinese outlines,
-language-dependent shaping, kana hints, wrapping, Unicode boundaries, and PNG
-exports. A UI test switches to Serif and captures both reading modes. Tests of
-our renderer do not establish another app's shaping or fallback behavior.
+`npm run verify:native` runs the app's Core Text tests on macOS. These compare
+Chinese outlines and Latin kerning against the original sources, check readings
+with language hints, and exercise wrapping, Unicode boundaries, and PNG exports.
+`npm run test:app` also runs the Mac UI test. The iOS flow test covers text editing
+and appearance controls. Tests of our renderer do not establish another app's
+shaping or fallback behavior.
 
 ## Rebuild
 
-Requirements: Node.js 22.18+, Python 3.10+, and macOS Swift tooling for native checks.
+The font pipeline requires Node.js 22.18+ and npm. It runs TypeScript directly;
+Python and a virtual environment are not needed. Native app checks require Xcode
+on macOS.
 
 ```sh
-python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
 npm ci --ignore-scripts
-.venv/bin/python scripts/fetch_sources.py
 npm run build
-npm run verify
+npm test
+
+# macOS: native rendering checks and the preview app.
+npm run verify:native
+npm run app
 ```
 
-Font inputs are pinned to upstream revisions and SHA-256 hashes in `sources.json`.
-JS and Python dependencies are pinned. A fixed build time makes outputs reproducible.
+`npm run build` verifies the source hashes and restores missing inputs before
+composition; `npm run fetch` does only that step. Font inputs are pinned to
+upstream revisions and SHA-256 hashes in `sources.json`. npm dependencies are
+locked, and a fixed build time makes outputs reproducible.
+
+[`AGENTS.md`](AGENTS.md) describes the code layout, font constraints, and development
+commands. All tooling lives in `tools/`; native app code and tests live in `app/`.
 
 ## Credits and licensing
 

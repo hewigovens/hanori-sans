@@ -13,12 +13,13 @@ own signing team in Xcode.
 From the repository root, the macOS entrypoint is:
 
 ```sh
-./script/build_and_run.sh
+npm run app
 ```
 
-It also supports `--verify`, `--debug`, `--logs`, and `--telemetry`. The Codex
-Run action uses this script. XcodeGen 2.46+ regenerates the checked-in project
-from `app/project.yml` when installed; Xcode alone can open the existing project.
+Use `npm run app -- --verify`, `--debug`, `--logs`, or `--telemetry` for the other
+runner modes. XcodeGen regenerates the checked-in project from `app/project.yml`
+when installed; Xcode alone can open the existing project. The runner is TypeScript
+in `tools/hanori.ts`, shared with the font commands.
 
 ## Use
 
@@ -62,10 +63,11 @@ Run these commands from the repository root:
 # Regenerate after editing project.yml (requires XcodeGen).
 xcodegen generate --spec app/project.yml
 
-# Native macOS app and renderer tests.
-xcodebuild -project app/HanoriPreview.xcodeproj -scheme HanoriPreview \
-  -destination 'platform=macOS' -derivedDataPath build/apple \
-  CODE_SIGNING_ALLOWED=NO -only-testing:HanoriPreviewTests test
+# Native macOS composition and renderer tests.
+npm run verify:native
+
+# Include the Mac UI test.
+npm run test:app
 
 # iOS Simulator: replace the device name with an available simulator.
 xcodebuild -project app/HanoriPreview.xcodeproj -scheme HanoriPreview \
@@ -78,9 +80,11 @@ xcodebuild -project app/HanoriPreview.xcodeproj -scheme HanoriPreview \
   DEVELOPMENT_TEAM=YOUR_TEAM_ID -allowProvisioningUpdates test
 ```
 
-The shared tests load all four bundled fonts, check distinct Sans/Serif outlines,
-and exercise actual Core Text glyph selection across language hints, verify
-per-paragraph kana handling and narrow wrapping, and decode an exported PNG.
+The shared tests load all four bundled fonts, compare Chinese outlines and Latin
+kerning against the pinned sources, and exercise actual Core Text glyph selection
+across language hints, per-paragraph kana handling, narrow wrapping, and PNG exports.
+The original fonts are resources of the test target only; they are not added to
+the production app bundle.
 The PNG exports for both designs are retained as test attachments. The UI test
 switches to Serif and retains screenshots of its default and Furigana cards.
 The iOS flow test also selects a sample, edits text, changes appearance settings,

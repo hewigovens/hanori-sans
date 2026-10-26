@@ -17,6 +17,8 @@
 		38D05C6DC403971679DDD275 /* licenses in Resources */ = {isa = PBXBuildFile; fileRef = E4E34A262F434246C09B3E53 /* licenses */; };
 		399F36C7CD211693E90D9A4C /* HanoriPreviewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17E1EED429C504960154F8D /* HanoriPreviewApp.swift */; };
 		3EE63BDED4717AD5160DB599 /* TypographyControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A375F5FCFA3F0B25DA35A0E /* TypographyControls.swift */; };
+		435037E2C9AFC179118B13D7 /* sources in Resources */ = {isa = PBXBuildFile; fileRef = 1CCF19D491A16FC2573DB847 /* sources */; };
+		46CB705367A6ACF86B2D675B /* FontCompositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29303BDB2A391849D0F3B6BD /* FontCompositionTests.swift */; };
 		5F1712E2D75417458F703EDF /* MobilePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586118AF3C04A5D50FF22E6 /* MobilePreviewView.swift */; };
 		6032499E1CE53DEF2F0CA396 /* SpecimenLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF20EF70A8D7C92D8A05B0B /* SpecimenLayout.swift */; };
 		6CEAA0868925726A3B3BB5F1 /* TextEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE9FBBEC02E072406A24D96 /* TextEditorSheet.swift */; };
@@ -54,7 +56,9 @@
 		02D177486611F15A5E5F0263 /* HanoriSansFurigana-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HanoriSansFurigana-Regular.otf"; sourceTree = "<group>"; };
 		0BC485B7FC3CC31D144C0B4C /* HanoriPreviewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanoriPreviewUITests.swift; sourceTree = "<group>"; };
 		14008731DA13C7B199F31999 /* HanoriSerif-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HanoriSerif-Regular.otf"; sourceTree = "<group>"; };
+		1CCF19D491A16FC2573DB847 /* sources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sources; path = ../sources; sourceTree = SOURCE_ROOT; };
 		246BDBFC9C9F3E751C5CF2C4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		29303BDB2A391849D0F3B6BD /* FontCompositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontCompositionTests.swift; sourceTree = "<group>"; };
 		3BD44E29379DF3BF3B6826E1 /* SpecimenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecimenView.swift; sourceTree = "<group>"; };
 		55FB72802A46048936D4635E /* SpecimenList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecimenList.swift; sourceTree = "<group>"; };
 		5758067EDE97AEE0627CA101 /* FontCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontCatalog.swift; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 			children = (
 				F480AA9D6419FF874C113906 /* Assets.xcassets */,
 				E4E34A262F434246C09B3E53 /* licenses */,
+				1CCF19D491A16FC2573DB847 /* sources */,
 				3AD8B61DB04F7AD1D10785B6 /* dist */,
 				F4AED4675A65E5064543437E /* Sources */,
 				7F34C851DEC857C73D6B1F11 /* Tests */,
@@ -161,6 +166,7 @@
 		7F34C851DEC857C73D6B1F11 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				29303BDB2A391849D0F3B6BD /* FontCompositionTests.swift */,
 				CE988B2DCF4762AA6A6A43D8 /* HanoriPreviewTests.swift */,
 			);
 			path = Tests;
@@ -229,6 +235,7 @@
 			buildConfigurationList = F8226FCE25BD7466067BA232 /* Build configuration list for PBXNativeTarget "HanoriPreviewTests" */;
 			buildPhases = (
 				2B588F43A29538271347A80B /* Sources */,
+				0A43A29C842A8E42F1BFA9FE /* Resources */,
 			);
 			buildRules = (
 			);
@@ -303,6 +310,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0A43A29C842A8E42F1BFA9FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				435037E2C9AFC179118B13D7 /* sources in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1479F78B948842E431F12997 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -323,6 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46CB705367A6ACF86B2D675B /* FontCompositionTests.swift in Sources */,
 				D8867DF6C44C1ECC81DF1FC8 /* HanoriPreviewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

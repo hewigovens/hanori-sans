@@ -4,10 +4,24 @@
   "version": "0.1.3",
   "type": "module",
   "scripts": {
-    "build": ".venv/bin/python scripts/build_base.py && node scripts/build_furigana.mjs && .venv/bin/python scripts/build_default.py",
-    "verify": ".venv/bin/python scripts/verify.py && swift -module-cache-path vendor/swift-module-cache scripts/render.swift . && swift -module-cache-path vendor/swift-module-cache scripts/render.swift . serif && swift -module-cache-path vendor/swift-module-cache scripts/probe_default.swift . && swift -module-cache-path vendor/swift-module-cache scripts/probe_default.swift . serif && swift -module-cache-path vendor/swift-module-cache scripts/probe_latin.swift ."
+    "fetch": "node tools/hanori.ts fetch",
+    "build": "node --max-old-space-size=4096 tools/hanori.ts build",
+    "check": "tsc --noEmit",
+    "test": "npm run check && node --test tools/fonts.test.ts && npm run verify",
+    "verify": "node --max-old-space-size=4096 tools/hanori.ts verify",
+    "verify:native": "node tools/hanori.ts test-app --unit",
+    "app": "node tools/hanori.ts app",
+    "test:app": "node tools/hanori.ts test-app"
   },
+  "engines": { "node": ">=22.18.0" },
   "dependencies": {
-    "furifont": "0.6.2"
+    "furifont": "0.6.2",
+    "harfbuzzjs": "1.6.4",
+    "ot-builder": "1.8.1",
+    "pathkit-wasm": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.0",
+    "typescript": "5.9.3"
   }
 }

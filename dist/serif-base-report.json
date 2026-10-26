@@ -2,7 +2,6 @@
   "family": "Hanori Serif",
   "latin_glyphs_replaced": 305,
   "latin_kerning_lookups": 1,
-  "latin_test_font": "build/HanoriSerifLatin.otf",
   "glyph_count": 31058,
   "cjk_units_per_em": 1000
 }

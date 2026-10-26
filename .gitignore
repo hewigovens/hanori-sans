@@ -1,10 +1,7 @@
 # Local dependencies and build intermediates
 node_modules/
-.venv/
 build/
 vendor/
-__pycache__/
-*.py[cod]
 *.part
 
 # Download bundles and machine-specific installation records
@@ -16,3 +13,4 @@ xcuserdata/
 *.xcresult/
 .xcodebuildmcp/
 .DS_Store
+.codex/

@@ -1,7 +1,4 @@
 {
-  "base": "build/HanoriSansBase-Regular.otf",
-  "family": "Hanori Sans Furigana",
-  "version": "0.1.3",
   "furiganaScript": "hiragana",
   "take": "max",
   "isolated": true,

@@ -47,7 +47,11 @@ targets:
   HanoriPreviewTests:
     type: bundle.unit-test
     supportedDestinations: [iOS, macOS]
-    sources: [Tests]
+    sources:
+      - Tests
+      - path: ../sources
+        type: folder
+        buildPhase: resources
     dependencies:
       - target: HanoriPreview
     settings:

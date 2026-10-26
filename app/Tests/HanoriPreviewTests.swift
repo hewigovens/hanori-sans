@@ -30,12 +30,15 @@ final class HanoriPreviewTests: XCTestCase {
             settings.text = "今日は日本語の勉強をします。東京駅"
             settings.hint = .english
             let plain = SpecimenLayout(catalog: catalog, face: typeface.faces[0], settings: settings, width: 1200)
+            settings.hint = .unspecified
+            let untagged = SpecimenLayout(catalog: catalog, face: typeface.faces[0], settings: settings, width: 1200)
             settings.hint = .chinese
             let chinese = SpecimenLayout(catalog: catalog, face: typeface.faces[0], settings: settings, width: 1200)
             settings.hint = .japanese
             let japanese = SpecimenLayout(catalog: catalog, face: typeface.faces[0], settings: settings, width: 1200)
             let always = SpecimenLayout(catalog: catalog, face: typeface.faces[1], settings: settings, width: 1200)
             XCTAssertEqual(glyphs(plain), glyphs(chinese))
+            XCTAssertEqual(glyphs(plain), glyphs(untagged))
             XCTAssertNotEqual(glyphs(plain), glyphs(japanese))
             XCTAssertEqual(glyphs(japanese), glyphs(always))
             settings.hint = .english

@@ -1,13 +1,15 @@
 {
   "checks": [
-    "all font tables load",
+    "font and table checksums",
+    "font tables load",
     "base coverage retained",
     "full-width Han",
-    "Chinese source outlines retained",
-    "Latin source ASCII widths",
+    "all Chinese Han outlines retained",
+    "Latin source widths and kerning",
     "CFF/hmtx consistency",
     "sorted layout coverages",
     "locale substitutions disabled",
+    "language-dependent furigana",
     "embedding permitted"
   ],
   "fonts": [
@@ -17,7 +19,7 @@
       "glyphs": 65516,
       "codepoints": 30926,
       "full_width_han_checked": 27801,
-      "sha256": "3b2b894d511df25fec0baaec96727a856f41d84d3fdb608355f4cd14d3e61ed5"
+      "sha256": "1828e4f20e0f8e698118feb4de845c6066bdec88598da51a75b44ded9e3ab073"
     },
     {
       "file": "HanoriSansFurigana-Regular.otf",
@@ -25,7 +27,7 @@
       "glyphs": 65516,
       "codepoints": 30926,
       "full_width_han_checked": 27801,
-      "sha256": "47aeea35d696f9161bfb8901169dd6ca7d5ee24cb92b040d4132afa9bac17d4f"
+      "sha256": "bfc8512ecf423e8257da57d6e71012cd016aa661f96ca047119437b40c891809"
     },
     {
       "file": "HanoriSerif-Regular.otf",
@@ -33,7 +35,7 @@
       "glyphs": 65530,
       "codepoints": 30930,
       "full_width_han_checked": 27801,
-      "sha256": "0a379899325c82eef2bcb4720e969ffeac309b56f137f5014dd174fc656b265f"
+      "sha256": "c6218bd46eef50275aba913e1accb4a9ce85cda0ed92580d23fae106a6fcfc1d"
     },
     {
       "file": "HanoriSerifFurigana-Regular.otf",
@@ -41,7 +43,7 @@
       "glyphs": 65530,
       "codepoints": 30930,
       "full_width_han_checked": 27801,
-      "sha256": "dc8c10140495fc323cd07645d2d83aeaec8189e085113d23ada5acfd4c07abb0"
+      "sha256": "890d6b43ed58390d6b370e7d4e75f86f2793ecafbfef7240cb344a87a04be441"
     }
   ]
 }
