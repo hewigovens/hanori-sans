@@ -18,7 +18,11 @@ struct ContentView: View {
                 }
                 .pickerStyle(.segmented)
                 .accessibilityIdentifier("typeface")
+                #if os(macOS)
                 .frame(maxWidth: 320)
+                #else
+                .frame(maxWidth: .infinity)
+                #endif
                 .padding(18)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 Divider()
