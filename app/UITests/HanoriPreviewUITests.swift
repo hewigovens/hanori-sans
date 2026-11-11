@@ -1,6 +1,23 @@
 import XCTest
 
 final class HanoriPreviewUITests: XCTestCase {
+    func testSafariSetupReturnsToPreview() {
+        let app = XCUIApplication()
+        app.launch()
+        let setup = app.buttons["safari-extension"]
+        XCTAssertTrue(setup.waitForExistence(timeout: 10))
+        setup.tap()
+        let done = app.buttons["safari-setup-done"]
+        XCTAssertTrue(done.waitForExistence(timeout: 5))
+        let attachment = XCTAttachment(screenshot: screenshot(app))
+        attachment.name = "Hanori Safari setup"
+        attachment.lifetime = .keepAlways
+        add(attachment)
+        done.tap()
+        XCTAssertTrue(setup.waitForExistence(timeout: 5))
+        XCTAssertFalse(done.exists)
+    }
+
     #if os(iOS)
     func testTextAndAppearanceSheetsUpdatePreview() {
         let app = XCUIApplication()

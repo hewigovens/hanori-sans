@@ -1,19 +1,10 @@
 import assert from 'node:assert/strict';
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
-import { execFile, spawn } from 'node:child_process';
-import { promisify } from 'node:util';
 import { basename } from 'node:path';
-import { at, root, families, readJSON } from './fonts.ts';
+import { at, families, readJSON } from './fonts.ts';
+import { exec as capture, run } from './process.ts';
+import { verifySafariResources } from './safari-resources.ts';
 import { sha256 } from './verify.ts';
-
-const capture = promisify(execFile);
-async function run(command: string, args: string[]) {
-  await new Promise<void>((resolve, reject) => {
-    const process = spawn(command, args, { cwd: root, stdio: 'inherit' });
-    process.on('error', reject);
-    process.on('exit', (code, signal) => code === 0 ? resolve() : reject(new Error(`${command} ${args.join(' ')} failed (${signal ?? code})`)));
-  });
-}
 
 async function fetchSources() {
   const sources = await readJSON<{ filename: string; url: string; sha256: string }[]>('sources.json');
@@ -42,14 +33,10 @@ const project = at('app/HanoriPreview.xcodeproj');
 const derivedData = at('build/apple');
 const appBundle = at('build/apple/Build/Products/Debug/HanoriPreview.app');
 const macDestination = `platform=macOS,arch=${process.arch === 'arm64' ? 'arm64' : 'x86_64'}`;
-const xcodeArgs = ['-quiet', '-project', project, '-scheme', 'HanoriPreview', '-destination', macDestination,
-  '-derivedDataPath', derivedData, 'CODE_SIGNING_ALLOWED=NO'];
-
-async function generateProject() {
-  try { await capture('xcodegen', ['--version']); }
-  catch (error) { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return; throw error; }
-  await run('xcodegen', ['generate', '--spec', 'app/project.yml', '--quiet']);
-}
+const xcodeArgs = (destination = macDestination) => ['-quiet', '-project', project, '-scheme', 'HanoriPreview',
+  '-destination', destination, '-derivedDataPath', derivedData, 'CODE_SIGNING_ALLOWED=NO'];
+// Native builds bundle these web resources.
+const buildSafariResources = () => run(process.execPath, ['tools/extension.ts', '--safari']);
 
 async function macAppPids() {
   let stdout: string;
@@ -68,8 +55,8 @@ async function macAppPids() {
 async function app(mode = 'run') {
   assert(['run', '--verify', '--debug', '--logs', '--telemetry'].includes(mode), `Unknown app mode ${mode}`);
   for (const pid of await macAppPids()) process.kill(pid);
-  await generateProject();
-  await run('xcodebuild', [...xcodeArgs, 'build']);
+  await buildSafariResources();
+  await run('xcodebuild', [...xcodeArgs(), 'build']);
   if (mode === '--debug') return run('lldb', ['--', `${appBundle}/Contents/MacOS/HanoriPreview`]);
   await run('/usr/bin/open', ['-n', appBundle]);
   if (mode === '--verify') {
@@ -81,6 +68,19 @@ async function app(mode = 'run') {
   }
   if (mode === '--logs' || mode === '--telemetry') await run('/usr/bin/log', ['stream', '--info', '--style', 'compact', '--predicate',
     mode === '--logs' ? 'process == "HanoriPreview"' : 'subsystem == "me.hanori.preview"']);
+}
+
+async function safari(args: string[]) {
+  assert(args.every(arg => ['--ios', '--open', '--project-only'].includes(arg)), 'safari accepts only --ios, --open, and --project-only');
+  const ios = args.includes('--ios');
+  assert(!(ios && args.includes('--open')), '--open launches only the macOS containing app. Run iOS from Xcode.');
+  await buildSafariResources();
+  if (args.includes('--project-only')) return;
+  await run('xcodebuild', [...xcodeArgs(ios ? 'generic/platform=iOS Simulator' : macDestination), 'build']);
+  const app = ios ? at('build/apple/Build/Products/Debug-iphonesimulator/HanoriPreview.app') : appBundle;
+  await verifySafariResources(`${app}/${ios ? '' : 'Contents/'}PlugIns/HanoriSafariExtension.appex/${ios ? '' : 'Contents/Resources/'}`);
+  console.log(`Built and checked Safari extension resources: ${app}`);
+  if (args.includes('--open')) await run('/usr/bin/open', ['-n', app]);
 }
 
 try {
@@ -97,10 +97,11 @@ try {
     case 'app': await app(args[0]); break;
     case 'test-app':
       assert(args.length === 0 || (args.length === 1 && args[0] === '--unit'), 'test-app accepts only --unit');
-      await generateProject();
-      await run('xcodebuild', [...xcodeArgs, ...(args[0] === '--unit' ? ['-only-testing:HanoriPreviewTests'] : []), 'test']);
+      await buildSafariResources();
+      await run('xcodebuild', [...xcodeArgs(), ...(args[0] === '--unit' ? ['-only-testing:HanoriPreviewTests'] : []), 'test']);
       break;
-    default: throw new Error('Usage: node tools/hanori.ts <fetch|build|verify|app|test-app>');
+    case 'safari': await safari(args); break;
+    default: throw new Error('Usage: node tools/hanori.ts <fetch|build|verify|app|test-app|safari>');
   }
 } catch (error) {
   console.error(error instanceof Error ? error.message : error);

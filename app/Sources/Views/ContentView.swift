@@ -6,6 +6,9 @@ struct ContentView: View {
     @State private var document: PNGDocument?
     @State private var exporting = false
     @State private var exportError: String?
+    @State private var showingSafariSetup = false
+    @State private var openingFontBook = false
+    @State private var fontInstallationError: String?
 
     var body: some View {
         NavigationStack {
@@ -20,6 +23,21 @@ struct ContentView: View {
                 #endif
             }
             .toolbar {
+                #if os(macOS)
+                Button("Install Fonts…", systemImage: "square.and.arrow.down") {
+                    openingFontBook = true
+                    Task { @MainActor in
+                        defer { openingFontBook = false }
+                        do { try await catalog.openInFontBook() }
+                        catch { fontInstallationError = error.localizedDescription }
+                    }
+                }
+                .disabled(openingFontBook)
+                .help("Open all four bundled fonts in Font Book to install them for use in other apps.")
+                .accessibilityIdentifier("install-fonts")
+                #endif
+                Button("Safari Extension", systemImage: "safari") { showingSafariSetup = true }
+                    .accessibilityIdentifier("safari-extension")
                 Button("Export PNG", systemImage: "square.and.arrow.up", action: export)
                     .accessibilityIdentifier("export-png")
                     .keyboardShortcut("e", modifiers: [.command, .shift])
@@ -28,6 +46,12 @@ struct ContentView: View {
         #if os(macOS)
         .frame(minWidth: 680, minHeight: 560)
         #endif
+        .sheet(isPresented: $showingSafariSetup) { SafariSetupView() }
+        .alert("Could not open Font Book", isPresented: Binding(
+            get: { fontInstallationError != nil }, set: { if !$0 { fontInstallationError = nil } }
+        )) {
+            Button("OK") { fontInstallationError = nil }
+        } message: { Text(fontInstallationError ?? "") }
         .fileExporter(isPresented: $exporting, document: document, contentType: .png, defaultFilename: "Hanori-preview") { result in
             if case .failure(let error) = result { exportError = error.localizedDescription }
         }
