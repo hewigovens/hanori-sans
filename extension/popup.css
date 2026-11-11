@@ -1,0 +1,30 @@
+:root { color-scheme: light dark; font: 14px/1.5 system-ui, sans-serif; color: light-dark(#18352f, #e2efeb); background: light-dark(#f7f8f3, #172520); }
+/* Desktop popups size to their content; the iOS sheet is wider and must be filled. */
+body { margin: 0; min-width: 340px; }
+main { padding: 22px 22px max(22px, env(safe-area-inset-bottom)); }
+header { display: flex; align-items: center; gap: 12px; }
+h1 { font-size: 24px; line-height: 1.2; margin: 0; }
+header p { margin: 3px 0 0; }
+.mark { background: #276451; color: white; border-radius: 12px; padding: 6px 12px; font: 32px serif; }
+#site { overflow-wrap: anywhere; font-size: 12px; opacity: .75; border-bottom: 1px solid #7a998855; padding-bottom: 14px; }
+label { display: block; margin: 12px 0 6px; }
+.toggle { font-weight: 650; }
+input { accent-color: #32745e; }
+select, button, textarea, input[type=text] { font: inherit; border: 1px solid #7a9988; border-radius: 7px; padding: 8px 10px; box-sizing: border-box; }
+select, textarea, input[type=text] { width: 100%; }
+.hint, footer { font-size: 12px; opacity: .8; }
+.actions { display: flex; gap: 8px; margin-top: 18px; }
+button { cursor: pointer; }
+button[type=submit] { color: white; background: #276451; flex: 1; }
+button:disabled { cursor: default; opacity: .5; }
+:focus-visible { outline: 2px solid #56a38b; outline-offset: 3px; }
+#status { min-height: 42px; }
+footer { border-top: 1px solid #7a998855; padding-top: 12px; }
+details { margin: 16px 0; }
+summary { cursor: pointer; font-weight: 650; }
+#correction-form button { margin-top: 16px; width: 100%; }
+#correction-list { padding-left: 18px; font-size: 12px; }
+#correction-list li { margin: 12px 0; overflow-wrap: anywhere; }
+#correction-list button { display: block; padding: 3px 8px; margin-top: 4px; }
+/* iOS zooms the page when a focused control's text is under 16px. */
+@media (pointer: coarse) { :root { font-size: 16px; } select, button, textarea, input[type=text] { padding: 11px 12px; } }

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hanori reading help</title>
+<link rel="stylesheet" href="popup.css">
+<main>
+  <header><span lang="ja" class="mark">文</span><div><h1>Hanori</h1><p>Japanese reading help</p></div></header>
+  <p id="site"></p>
+  <form>
+    <label class="toggle"><input id="enabled" type="checkbox"> Enable readings</label>
+    <label for="mode">Reading mode</label>
+    <select id="mode"><option value="font">Font · lightweight</option><option value="accurate">Accurate · sentence analysis</option></select>
+    <label for="family">Typeface</label>
+    <select id="family"><option value="sans">Sans</option><option value="serif">Serif</option></select>
+    <label><input id="untagged" type="checkbox"> Include text without a language tag</label>
+    <p class="hint">Japanese-tagged text only by default. Other language tags, existing ruby, code, and editable fields are preserved.</p>
+    <label><input id="always" type="checkbox"> Always enable on this site</label>
+    <div class="actions"><button type="submit">Apply</button><button type="button" id="print" disabled>Print…</button></div>
+  </form>
+  <p id="status" role="status" aria-live="polite">Checking this page…</p>
+  <details id="correction-editor">
+    <summary>Correct a reading</summary>
+    <p class="hint">In Accurate mode, paste a short context phrase and the word to correct. Author-supplied ruby is preserved.</p>
+    <form id="correction-form">
+      <label for="context">Exact context phrase</label>
+      <textarea id="context" rows="2" maxlength="500" required placeholder="生物を食べる"></textarea>
+      <label for="surface">Written word in that phrase</label>
+      <input id="surface" type="text" maxlength="100" required placeholder="生物">
+      <label for="reading">Reading in kana</label>
+      <input id="reading" type="text" maxlength="100" required placeholder="なまもの">
+      <label for="scope">Apply correction to</label>
+      <select id="scope"><option value="document">This document</option><option value="site">This site</option></select>
+      <button type="submit">Save correction</button>
+    </form>
+    <p id="correction-status" role="status" aria-live="polite"></p>
+    <ul id="correction-list"></ul>
+  </details>
+  <footer>Everything runs locally. Font mode needs Hanori; Accurate mode uses a plain Japanese font and a bundled dictionary. Readings may still be wrong.</footer>
+</main>
+<script type="module" src="popup.js"></script>
+</html>
