@@ -1,0 +1,54 @@
+name: Release checks
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: xcode-27
+    timeout-minutes: 45
+    env:
+      RELEASE_TAG: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || '' }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - name: Check release version
+        run: npm run package:release -- --check
+      - run: npm ci --ignore-scripts
+      - name: Rebuild all four fonts from pinned inputs
+        run: npm run build
+      - name: Verify fonts and tooling
+        run: npm test
+      - name: Require committed distribution outputs to match
+        run: git diff --exit-code -- dist
+      - name: Verify native font rendering
+        run: npm run verify:native
+      - name: Verify macOS app and embedded extension
+        run: npm run build:safari
+      - name: Verify iOS Simulator app and embedded extension
+        run: npm run build:safari -- --ios
+      - name: Package fonts and verify archive contents
+        run: npm run package:release
+      - name: Keep release candidate and tap cask
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: hanori-font-release
+          path: |
+            build/release/Hanori-*.zip
+            build/release/SHA256SUMS
+            build/release/font-hanori.rb
+          if-no-files-found: error
