@@ -46,4 +46,4 @@ The existing font cask remains `brew install --cask hewigovens/tap/font-hanori`.
 
 ## Status
 
-The notarization and publication commands and the hosted workflow have not yet completed a first real release. Local packaging, version-mismatch, archive-integrity, and signing checks do not cover them.
+Version 0.1.4 was the first release to complete this flow end to end: notarization, tag checks on the hosted runner, publication, and both tap casks.

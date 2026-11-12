@@ -39,7 +39,7 @@ try {
 } finally { await rm(extracted, { recursive: true, force: true }); }
 const tap = resolve(root, '../tap');
 const tapRemote = (await exec('git', ['remote', 'get-url', '--push', 'origin'], { cwd: tap })).stdout.trim();
-assert(/^(?:git@github\.com:|https:\/\/github\.com\/)hewigovens\/tap(?:\.git)?$/.test(tapRemote), 'Expected ../tap to be hewigovens/tap.');
+assert(/^(?:git@github\.com:|https:\/\/github\.com\/)hewigovens\/homebrew-tap(?:\.git)?$/.test(tapRemote), 'Expected ../tap to be hewigovens/homebrew-tap.');
 assert.equal((await exec('git', ['status', '--porcelain', '--', 'Casks/font-hanori.rb', 'Casks/hanori-preview.rb'], { cwd: tap })).stdout.trim(), '', 'Preserve or commit existing Hanori cask edits first.');
 await run(process.execPath, ['tools/release.ts', tag]);
 const fontZip = `Hanori-${version}.zip`;
