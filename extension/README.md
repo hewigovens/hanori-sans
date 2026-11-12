@@ -20,7 +20,7 @@ The build derives the toolbar icons from the Mac app icon with macOS `sips`, so 
 
 Open `chrome://extensions` (or `edge://extensions`), turn on Developer mode, choose **Load unpacked**, and select this repository's `build/extension` folder. After rebuilding, reload the extension and reload pages where it was running. Open a webpage, click Hanori, select **Enable readings** and a mode, then **Apply**. Uncheck Enable readings and apply to undo.
 
-In Chromium, Font mode needs either `HanoriSansFurigana-Regular.otf` or `HanoriSerifFurigana-Regular.otf` from `dist/`, installed using your OS font manager. Reopen the browser after installing fonts. Accurate mode tries installed Hiragino, Yu, Meiryo/MS Mincho, or Noto CJK JP faces. If no supported plain face loads, it reports the error without silently falling back to Hanori.
+In Chromium, Font mode needs either `HanoriSansFurigana-Regular.otf` or `HanoriSerifFurigana-Regular.otf` from `dist/`, installed using your OS font manager. Reopen the browser after installing fonts. When neither is installed, the popup disables Font mode and selects Accurate mode. Accurate mode tries installed Hiragino, Yu, Meiryo/MS Mincho, or Noto CJK JP faces. If no supported plain face loads, it reports the error without silently falling back to Hanori.
 
 By default, only text with an inherited `lang="ja"` or `ja-*` tag receives readings. **Include text without a language tag** also includes untagged text and `lang=""` regions. Explicitly non-Japanese language tags always win. This option can annotate untagged Chinese text; it does not detect language. Code, editable fields, SVG, and MathML are skipped. Existing ruby keeps its readings.
 
@@ -61,6 +61,8 @@ The current page is reanalyzed if Accurate mode is active. Corrections also appl
 
 Document scope includes the URL path and query, excluding its fragment. Site scope uses the exact origin; local files support document scope only. All matches of the phrase within that scope are affected. A document correction outranks a site correction, newer rules outrank older ones within a scope, user corrections outrank built-in phrase rules, and phrase rules outrank analyzer output. Author ruby remains authoritative. There is a limit of 500 saved corrections.
 
+## Privacy
+
 Page text is analyzed locally in the extension service worker and is not sent to an external service. Only user-entered correction phrases/readings, their scope URLs, and site preferences are saved in local extension storage, not sync storage.
 
 ## Verification
@@ -81,6 +83,15 @@ The browser test needs Playwright's Chromium (`npx playwright install chromium` 
 The standalone popup test supplies the fixture tab ID. It does not exercise the actual browser toolbar or optional-permission prompt. Tests inspect the popup and page in Chromium; Installed Safari extension behavior, Firefox, and broad real-site compatibility remain untested.
 
 The reviewed set has **14 annotated reading targets, all correct**, and **8 contrast targets deliberately omitted** (14/22 target coverage). Six annotated targets exercise explicit textbook phrase rules. This small set is regression coverage, not an estimate of general Japanese reading accuracy. The full 1,252-character, eight-paragraph textbook was also processed locally (135 annotations); its complete readings have not been proofread.
+
+## Chrome Web Store package
+
+```sh
+npm run package:extension                      # build/release/hanori-reading-VERSION.zip
+npm run package:extension -- path/to/key.pem   # also a CRX signed with that key
+```
+
+The ZIP is what the Web Store dashboard accepts for a first upload. The signed CRX is for [verified uploads](https://developer.chrome.com/blog/verified-uploads-cws) once the item has a registered key; signing needs Chrome, Edge, or Chromium (override with `CHROME_BIN`). Keep the key outside the repository. Edge installs from the same Chrome Web Store listing. Draft listing text and privacy answers are in [the store listing notes](../docs/store-listing.md), with screenshots in `docs/screenshots/store-*.png`. Uploading and publishing are manual. Version 0.1.3 was submitted for review on 2026-11-12.
 
 ## Analyzer and distribution
 

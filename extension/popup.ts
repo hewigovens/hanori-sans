@@ -71,7 +71,13 @@ try {
   const state = await send();
   enabled.checked = state.enabled;
   family.value = state.family;
-  mode.value = state.mode ?? 'font';
+  if (await fontModeAvailable()) mode.value = state.mode ?? 'font';
+  else {
+    const option = document.querySelector<HTMLOptionElement>('#font-mode')!;
+    option.disabled = true;
+    option.textContent = 'Font · install Hanori fonts first';
+    mode.value = 'accurate';
+  }
   untagged.checked = state.includeUntagged;
   always.checked = Boolean(saved);
   document.querySelector('#site')!.textContent = origin || 'Current local file';
@@ -80,6 +86,12 @@ try {
   await loadCorrections();
 } catch (error) { status.textContent = String((error as Error).message); }
 
+// Safari bundles the fonts; Chromium can only use installed ones.
+async function fontModeAvailable() {
+  if (api.runtime.getManifest().web_accessible_resources?.length) return true;
+  const installed = (name: string) => new FontFace('Hanori Probe', `local("${name}")`).load().then(() => true, () => false);
+  return (await Promise.all(['HanoriSansFurigana-Regular', 'HanoriSerifFurigana-Regular'].map(installed))).some(Boolean);
+}
 async function correctionRequest(action: string, extra: Record<string, unknown> = {}): Promise<Correction[]> {
   const response = await api.runtime.sendMessage({ type: 'corrections', tabId, action, ...extra });
   if (response.error) throw new Error(response.error);

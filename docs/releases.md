@@ -36,6 +36,10 @@ The font packager round-trips every ZIP entry against its input bytes and includ
 
 Use **Actions → Release checks → Run workflow** to validate an arbitrary ref without publishing. Tag pushes also validate only. The workflow runs on GitHub's hosted `xcode-27` image; no self-hosted runner is needed.
 
+## Browser extension
+
+The Chromium extension is packaged separately with `npm run package:extension`; see [the extension guide](../extension/README.md#chrome-web-store-package). It shares the version in `package.json`. Uploading it to the Chrome Web Store is a manual step and is not part of `release:publish`.
+
 ## Homebrew
 
 The existing font cask remains `brew install --cask hewigovens/tap/font-hanori`. After the first app release and tap update, the app cask is `brew install --cask hewigovens/tap/hanori-preview`. It installs the existing Preview app, including its Safari extension, without automatically installing fonts system-wide. The app’s **Install Fonts…** action lets users install the bundled fonts through Font Book. Both casks are generated from the hashes of the actual published assets; don't substitute a locally rebuilt ZIP's checksum for an already published asset.

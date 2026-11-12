@@ -233,6 +233,23 @@ test('Chromium: language boundaries, dynamic content, undo, and extension site p
     await popup.getByRole('button', { name: 'Apply', exact: true }).click();
     await popup.waitForFunction(() => document.querySelector('#status')!.textContent!.startsWith('Accurate mode on'));
     await popup.locator('#correction-editor summary').click();
+    assert.equal(await popup.locator('#font-mode').isDisabled(), false);
+
+    // Without installed Hanori fonts, a fresh page defaults to Accurate mode.
+    await popup.locator('#enabled').uncheck();
+    await popup.getByRole('button', { name: 'Apply', exact: true }).click();
+    await popup.waitForFunction(() => document.querySelector('#status')!.textContent === 'Readings are off.');
+    const fontless = await context.newPage();
+    await fontless.addInitScript(({ tabId, origin }) => {
+      chrome.tabs.query = async () => [{ id: tabId, url: origin }] as chrome.tabs.Tab[];
+      window.FontFace = class extends FontFace {
+        override load(): Promise<FontFace> { return Promise.reject(new Error('missing font fixture')); }
+      };
+    }, { tabId, origin });
+    await fontless.goto(`chrome-extension://${id}/popup.html`);
+    await fontless.waitForFunction(() => document.querySelector('#status')!.textContent === 'Readings are off.');
+    assert.equal(await fontless.locator('#mode').inputValue(), 'accurate');
+    assert.equal(await fontless.locator('#font-mode').isDisabled(), true);
     assert.deepEqual(errors, []);
   } finally {
     await context.close();

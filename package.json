@@ -17,6 +17,7 @@
     "build:safari": "npm run check && node tools/hanori.ts safari",
     "test:safari": "npm run check && node --test tools/safari.test.ts",
     "package:release": "node tools/release.ts",
+    "package:extension": "npm run check && node tools/pack-extension.ts",
     "release:app": "node tools/release-app.ts",
     "release:publish": "node tools/publish-release.ts"
   },
