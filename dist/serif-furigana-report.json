@@ -1,5 +1,5 @@
 {
-  "version": "0.1.3",
+  "version": "0.1.4",
   "compiler": "furifont@0.6.2",
   "config": {
     "family": "Hanori Serif Furigana",
@@ -38,7 +38,7 @@
     "formats": [
       "otf"
     ],
-    "version": "0.1.3"
+    "version": "0.1.4"
   },
   "stats": {
     "candidates": 233904,

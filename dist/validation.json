@@ -19,7 +19,7 @@
       "glyphs": 65516,
       "codepoints": 30926,
       "full_width_han_checked": 27801,
-      "sha256": "1828e4f20e0f8e698118feb4de845c6066bdec88598da51a75b44ded9e3ab073"
+      "sha256": "b8cc42ae2ced60ca0039f9e8c1ec3503f24500c3e4a8d4eecc6e39cfff507050"
     },
     {
       "file": "HanoriSansFurigana-Regular.otf",
@@ -27,7 +27,7 @@
       "glyphs": 65516,
       "codepoints": 30926,
       "full_width_han_checked": 27801,
-      "sha256": "bfc8512ecf423e8257da57d6e71012cd016aa661f96ca047119437b40c891809"
+      "sha256": "c3cbfe14e8e696aa1a351f1916f54e8a6b230720a134199cb780b1d2f5408a0f"
     },
     {
       "file": "HanoriSerif-Regular.otf",
@@ -35,7 +35,7 @@
       "glyphs": 65530,
       "codepoints": 30930,
       "full_width_han_checked": 27801,
-      "sha256": "c6218bd46eef50275aba913e1accb4a9ce85cda0ed92580d23fae106a6fcfc1d"
+      "sha256": "0476e5852fcd438987270f9c5b889e0a55576fcca8b71bf5ebb97c3ebbaf7fd6"
     },
     {
       "file": "HanoriSerifFurigana-Regular.otf",
@@ -43,7 +43,7 @@
       "glyphs": 65530,
       "codepoints": 30930,
       "full_width_han_checked": 27801,
-      "sha256": "890d6b43ed58390d6b370e7d4e75f86f2793ecafbfef7240cb344a87a04be441"
+      "sha256": "8bc2de568423fc5fcc39e82c0189a6cf1c9efdf6d6e91c3f8e91936424cc01d0"
     }
   ]
 }

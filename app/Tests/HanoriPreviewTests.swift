@@ -9,7 +9,7 @@ final class HanoriPreviewTests: XCTestCase {
         for face in PreviewFace.allCases {
             let font = catalog.font(face, size: 32)
             XCTAssertEqual(CTFontCopyPostScriptName(font) as String, face.fileName)
-            XCTAssertEqual(CTFontCopyName(font, kCTFontVersionNameKey) as String?, "Version 0.103")
+            XCTAssertEqual(CTFontCopyName(font, kCTFontVersionNameKey) as String?, "Version 0.104")
         }
     }
 

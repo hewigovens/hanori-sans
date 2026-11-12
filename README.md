@@ -1,4 +1,4 @@
-# Hanori 0.1.3
+# Hanori 0.1.4
 
 Fonts for English, Simplified Chinese, and Japanese reading, with **Sans** and **Serif** designs and optional built-in furigana.
 
